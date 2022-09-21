@@ -75,3 +75,15 @@ Obs: o container deve estar em execução
 
     Ex: docker exec -it hello-word /bin/bash
 ```
+
+# Comandos Linux
+
+```
+    ls -> listar arquivos e pastas no Linux
+    cd -> entrar dentro de uma pasta
+    pwd -> mostrar em qual diretório nós estamos 
+    cd .. -> voltar um nível no sistema de diretório
+    mkdir -> criando uma pasta 
+    touch -> criar um arquivo vazio
+    cd / -> voltar para o diretório raiz
+```
