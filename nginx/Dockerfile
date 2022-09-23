@@ -7,9 +7,14 @@
 FROM nginx:latest
 
 # copiando o arquivo conf.txt para a raiz da imagem (futuro container)
-# RUN cp conf.txt /
 COPY conf.txt /
 
-# para criar a nossa própria imagem, devemos usar o comando docker build
-# docker build -t NOME-DA-IMAGEM:TAG.
-# ex: docker build -t brq-nginx:latest.
+# apt-get update no linux atualiza todos os possíveis pacotes que podemos instalar
+RUN apt-get update
+
+# instalando o editor de texto nano
+RUN apt-get install nano -y
+
+# para criar a nossa própria imagem, devemos usar o comando docker build 
+# docker build -t NOME-DA-IMAGEM:TAG .
+# ex: docker build -t brq-nginx:latest .
