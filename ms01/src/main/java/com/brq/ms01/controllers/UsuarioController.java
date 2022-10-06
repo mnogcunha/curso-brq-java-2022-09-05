@@ -1,10 +1,8 @@
 package com.brq.ms01.controllers;
 
 import com.brq.ms01.models.UsuarioModel;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 
 @RestController
@@ -39,5 +37,19 @@ public class UsuarioController {
         counter++;
         System.out.println(usuario);
         return usuario;
+    }
+    @PatchMapping("usuarios/{id}")
+    public UsuarioModel update(@RequestBody UsuarioModel usuarioBody,
+                               @PathVariable int id ){
+        // como achar o usuario a ser alterado?
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (usuarios.get(i).getId() == id) {
+                // achamos o usuario a ser alterado
+                usuarios.get(i).setNome(usuarioBody.getNome());
+                usuarios.get(i).setEmail(usuarioBody.getEmail());
+                return usuarios.get(i);
+            }
+        }
+        return null;
     }
 }
