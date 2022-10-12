@@ -1,6 +1,8 @@
 package com.brq.ms01.controllers;
 
 import com.brq.ms01.models.UsuarioModel;
+import com.brq.ms01.services.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -8,68 +10,50 @@ import java.util.ArrayList;
 @RestController
 public class UsuarioController {
 
-    // Este ArrayList é didático, pois está simulando um banco de dados
-    private ArrayList<UsuarioModel> usuarios = new ArrayList<>();
-    private int counter = 1;
+    // private UsuarioService usuServ = new UsuarioService(); (usado conforme abaixo)
+    // @Autowired é importante pois permite que o Spring "instancie" o objeto do tipo UsuarioService
+    @Autowired
+    private UsuarioService usuServ;
 
-    /*
-     * o @GetMapping permite associoar o verbo GET com a rota /usuarios
-     * */
-    @GetMapping("usuarios")
+    // O @GetMapping permite associoar o verbo GET com a rota /usuarios
+     @GetMapping("usuarios")
     public ArrayList<UsuarioModel> getAllUsuarios() {
-//        UsuarioModel u = new UsuarioModel();
-//        u.setId(1);
-//        u.setNome("Manoel");
-//        u.setEmail("manoel@gmail.com");
-//
-//        usuarios.add(u);
-        return usuarios;
+
+        usuServ.mostrarMensagemService();
+        //   ArrayList<UsuarioModel> usuarios = usuServ.getAllUsuarios();
+        //   return usuarios;
+        return usuServ.getAllUsuarios();
     }
-    // o PostMapping permite associar o verbo POST com a rota /usuarios
+
+    // O @PostMapping permite associar o verbo POST com a rota /usuarios
     @PostMapping("usuarios")
     public UsuarioModel create(@RequestBody UsuarioModel usuario) {
-        usuario.setId( counter );
-        usuarios.add(usuario);
-        counter++;
-        System.out.println(usuario);
-        return usuario;
+        //   UsuarioModel u = usuServ.create(usuario)
+        return usuServ.create(usuario);
     }
+
+    // O @PatchMapping permite associar o verbo PATCH com a rota /usuarios/{id}
     @PatchMapping("usuarios/{id}")
-    public UsuarioModel update(@RequestBody UsuarioModel usuarioBody,
-                               @PathVariable int id ){
-        // como achar o usuario a ser alterado?
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getId() == id) {
-                // achamos o usuario a ser alterado
-                usuarios.get(i).setNome(usuarioBody.getNome());
-                usuarios.get(i).setEmail(usuarioBody.getEmail());
-                return usuarios.get(i);
-            }
-        }
-        return null;
+    public UsuarioModel update(@RequestBody UsuarioModel usuarioBody, @PathVariable int id ) {
+        //        UsuarioModel u = usuService.update(id, usuarioBody);
+        //        return u;
+        return usuServ.update(id, usuarioBody);
     }
+
+    // O @DeleteMapping permite associar o verbo DELETE com a rota /usuarios/{id}
     @DeleteMapping("usuarios/{id}")
     public String delete(@PathVariable int id) {
-
-        // como achar o usuario a ser deletado?
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getId() == id) {
-                // achamos o usuario a ser deletado
-                usuarios.remove(i);
-                return "Usuario deletado com sucesso!";
-            }
-        }
-        return "Usuario não encontrado";
+        //        String response = usuService.delete(id);
+        //        return response;
+        return usuServ.delete(id);
     }
+
+    // O @GetMapping permite associoar o verbo GET(getOne) com a rota /usuarios/{id}
     // busca por apenas um usuário (pelo id)
     @GetMapping("usuarios/{id}")
-    public UsuarioModel getOne(@PathVariable int id){
-
-        for (int i = 0; i < usuarios.size(); i++){
-            if (usuarios.get(i).getId() == id){
-                return usuarios.get(i);
-            } // if
-        } // for
-        return null;
+    public UsuarioModel getOne(@PathVariable int id) {
+        //        UsuarioModel u = usuService.getOne(id);
+        //        return u;
+        return usuServ.getOne(id);
     }
 }
