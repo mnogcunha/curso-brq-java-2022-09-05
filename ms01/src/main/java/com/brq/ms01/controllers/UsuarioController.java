@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class UsuarioController {
@@ -17,7 +18,7 @@ public class UsuarioController {
 
     // O @GetMapping permite associoar o verbo GET com a rota /usuarios
      @GetMapping("usuarios")
-    public ArrayList<UsuarioModel> getAllUsuarios() {
+    public List<UsuarioModel> getAllUsuarios() {
 
         usuServ.mostrarMensagemService();
         //   ArrayList<UsuarioModel> usuarios = usuServ.getAllUsuarios();

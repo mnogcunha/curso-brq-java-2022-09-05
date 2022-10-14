@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // A camada Service é responsável por armazenar as regras de negócio da aplicação
 @Service
@@ -23,8 +24,11 @@ public class UsuarioService {
         System.out.println("Mensagem do servico");
     }
     // Uso do verbo GET com a rota /usuarios
-    public ArrayList<UsuarioModel> getAllUsuarios() {
-        return usuarios;
+    public List<UsuarioModel> getAllUsuarios() {
+
+        // a repository vai executar : SELECT * FROM usuarios;
+        List<UsuarioModel> list = usuRepository.findAll();
+        return list;
     }
     // Uso do verbo POST com a rota /usuarios
     public UsuarioModel create(UsuarioModel usuario) {
