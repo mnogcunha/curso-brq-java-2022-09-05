@@ -19,12 +19,10 @@ public class UsuarioService {
 
         System.out.println("Mensagem do servico");
     }
-
     // Uso do verbo GET com a rota /usuarios
     public ArrayList<UsuarioModel> getAllUsuarios() {
         return usuarios;
     }
-
     // Uso do verbo POST com a rota /usuarios
     public UsuarioModel create(UsuarioModel usuario) {
         usuario.setId( counter );
