@@ -1,9 +1,9 @@
 package com.brq.ms01.services;
 
 import com.brq.ms01.models.UsuarioModel;
+import com.brq.ms01.repositories.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 
@@ -14,6 +14,9 @@ public class UsuarioService {
     // Este ArrayList é didático, pois está simulando um banco de dados
     private ArrayList<UsuarioModel> usuarios = new ArrayList<>();
     private int counter = 1;
+
+    @Autowired
+    private UsuarioRepository usuRepository;
 
     public void mostrarMensagemService() {
 
