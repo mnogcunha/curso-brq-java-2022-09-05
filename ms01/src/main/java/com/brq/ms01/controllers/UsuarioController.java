@@ -5,7 +5,6 @@ import com.brq.ms01.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -44,8 +43,8 @@ public class UsuarioController {
     // O @DeleteMapping permite associar o verbo DELETE com a rota /usuarios/{id}
     @DeleteMapping("usuarios/{id}")
     public String delete(@PathVariable int id) {
-        //        String response = usuService.delete(id);
-        //        return response;
+        //String response = usuService.delete(id);
+        //return response;
         return usuServ.delete(id);
     }
 
@@ -55,6 +54,7 @@ public class UsuarioController {
     public UsuarioModel getOne(@PathVariable int id) {
         //        UsuarioModel u = usuService.getOne(id);
         //        return u;
+        //
         return usuServ.getOne(id);
     }
 }

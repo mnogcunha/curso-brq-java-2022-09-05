@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 // A camada Service é responsável por armazenar as regras de negócio da aplicação
 @Service
@@ -20,58 +21,60 @@ public class UsuarioService {
     private UsuarioRepository usuRepository;
 
     public void mostrarMensagemService() {
-
         System.out.println("Mensagem do servico");
     }
+
     // Uso do verbo GET com a rota /usuarios
     public List<UsuarioModel> getAllUsuarios() {
-
         // a repository vai executar : SELECT * FROM usuarios;
         List<UsuarioModel> list = usuRepository.findAll();
         return list;
     }
+
     // Uso do verbo POST com a rota /usuarios
     public UsuarioModel create(UsuarioModel usuario) {
-        usuario.setId( counter );
-        usuarios.add(usuario);
-        counter++;
-        return usuario;
+        // INSERT INTO usuarios (name_user, email_user ) VALUEs()....
+        UsuarioModel usur = usuRepository.save(usuario);
+        System.out.println("Criou ID "+usur);
+        return usur;
     }
+
     // Uso do verbo PATCH com a rota /usuarios/{id}
     public UsuarioModel update(int id, UsuarioModel usuarioBody) {
-        // como achar o usuario a ser alterado?
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getId() == id) {
-                // achamos o usuario a ser alterado
-                usuarios.get(i).setNome(usuarioBody.getNome());
-                usuarios.get(i).setEmail(usuarioBody.getEmail());
-                return usuarios.get(i);
-            }
+        // Ver se o id existe no banco de dados
+        Optional<UsuarioModel> usuarioOptional = usuRepository.findById(id);
+        if(usuarioOptional.isPresent()) {
+            // Eu achei o usuário no banco de dados
+            UsuarioModel meuUsuario = usuarioOptional.get();
+            meuUsuario.setNome( usuarioBody.getNome() );
+            meuUsuario.setEmail( usuarioBody.getEmail() );
+            UsuarioModel usuarioSalvo = usuRepository.save(meuUsuario);
+            return usuarioSalvo;
         }
-        return null;
+        // Não achei o usuário no banco
+        else {
+            return usuarioOptional.orElseThrow( () -> new RuntimeException("Usuário não encontrado"));
+        }
     }
 
     // Uso do verbo DELETE com a rota /usuarios/{id}
     public String delete(int id) {
-        // como achar o usuario a ser deletado?
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getId() == id) {
-                // achamos o usuario a ser deletado
-                usuarios.remove(i);
-                return "Usuario deletado com sucesso!";
-            }
-        }
-        return "Usuario não encontrado";
+        usuRepository.deleteById(id);
+        return "Usuário delatado com sucesso!";
     }
 
     // Uso do verbo GET(getOne) com a rota /usuarios/{id}
     public UsuarioModel getOne(int id) {
-        // busca por apenas um usuário (pelo id)
-        for (int i = 0; i < usuarios.size(); i++){
-            if (usuarios.get(i).getId() == id){
-                return usuarios.get(i);
-            } // if
-        } // for
-        return null;
+        // Ver se o id existe no banco de dados
+        Optional<UsuarioModel> usuarioOptional = usuRepository.findById(id);
+        if(usuarioOptional.isPresent()) {
+            // Eu achei o usuário no banco de dados
+            UsuarioModel meuUsuario = usuarioOptional.get();
+            return meuUsuario;
+        }
+        // Não achei o usuário no banco
+        else {
+            return usuarioOptional.orElseThrow( () -> new RuntimeException("Usuário não encontrado"));
+        }
     }
 }
