@@ -41,20 +41,27 @@ public class UsuarioService {
 
     // Uso do verbo PATCH com a rota /usuarios/{id}
     public UsuarioModel update(int id, UsuarioModel usuarioBody) {
-        // Ver se o id existe no banco de dados
-        Optional<UsuarioModel> usuarioOptional = usuRepository.findById(id);
-        if(usuarioOptional.isPresent()) {
-            // Eu achei o usuário no banco de dados
-            UsuarioModel meuUsuario = usuarioOptional.get();
-            meuUsuario.setNome( usuarioBody.getNome() );
-            meuUsuario.setEmail( usuarioBody.getEmail() );
-            UsuarioModel usuarioSalvo = usuRepository.save(meuUsuario);
-            return usuarioSalvo;
-        }
-        // Não achei o usuário no banco
-        else {
-            return usuarioOptional.orElseThrow( () -> new RuntimeException("Usuário não encontrado"));
-        }
+        UsuarioModel usuario = usuRepository.findById(id)
+                .orElseThrow( () -> new RuntimeException("Usuário não localizado") );
+
+        usuario.setEmail( usuarioBody.getEmail() );
+        usuario.setNome( usuarioBody.getNome() );
+        return usuRepository.save(usuario);
+
+//        // Ver se o id existe no banco de dados
+//        Optional<UsuarioModel> usuarioOptional = usuRepository.findById(id);
+//        if(usuarioOptional.isPresent()) {
+//            // Eu achei o usuário no banco de dados
+//            UsuarioModel meuUsuario = usuarioOptional.get();
+//            meuUsuario.setNome( usuarioBody.getNome() );
+//            meuUsuario.setEmail( usuarioBody.getEmail() );
+//            UsuarioModel usuarioSalvo = usuRepository.save(meuUsuario);
+//            return usuarioSalvo;
+//        }
+//        // Não achei o usuário no banco
+//        else {
+//            return usuarioOptional.orElseThrow( () -> new RuntimeException("Usuário não encontrado"));
+//        }
     }
 
     // Uso do verbo DELETE com a rota /usuarios/{id}
@@ -65,16 +72,17 @@ public class UsuarioService {
 
     // Uso do verbo GET(getOne) com a rota /usuarios/{id}
     public UsuarioModel getOne(int id) {
-        // Ver se o id existe no banco de dados
-        Optional<UsuarioModel> usuarioOptional = usuRepository.findById(id);
-        if(usuarioOptional.isPresent()) {
-            // Eu achei o usuário no banco de dados
-            UsuarioModel meuUsuario = usuarioOptional.get();
-            return meuUsuario;
-        }
-        // Não achei o usuário no banco
-        else {
-            return usuarioOptional.orElseThrow( () -> new RuntimeException("Usuário não encontrado"));
-        }
+        return usuRepository.findById(id).orElseThrow( () -> new RuntimeException("Usuário não encontrado"));
+//        // Ver se o id existe no banco de dados
+//        Optional<UsuarioModel> usuarioOptional = usuRepository.findById(id);
+//        if(usuarioOptional.isPresent()) {
+//            // Eu achei o usuário no banco de dados
+//            UsuarioModel meuUsuario = usuarioOptional.get();
+//            return meuUsuario;
+//        }
+//        // Não achei o usuário no banco
+//        else {
+//            return usuarioOptional.orElseThrow( () -> new RuntimeException("Usuário não encontrado"));
+//        }
     }
 }

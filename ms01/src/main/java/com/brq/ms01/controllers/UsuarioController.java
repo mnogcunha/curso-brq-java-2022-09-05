@@ -16,7 +16,7 @@ public class UsuarioController {
     private UsuarioService usuServ;
 
     // O @GetMapping permite associoar o verbo GET com a rota /usuarios
-     @GetMapping("usuarios")
+    @GetMapping("usuarios")
     public List<UsuarioModel> getAllUsuarios() {
 
         usuServ.mostrarMensagemService();
