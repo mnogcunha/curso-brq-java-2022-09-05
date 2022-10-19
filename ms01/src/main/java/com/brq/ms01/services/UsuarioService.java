@@ -46,6 +46,7 @@ public class UsuarioService {
 
         usuario.setEmail( usuarioBody.getEmail() );
         usuario.setNome( usuarioBody.getNome() );
+        usuario.setTelefone( usuarioBody.getTelefone() );
         return usuRepository.save(usuario);
 
 //        // Ver se o id existe no banco de dados
