@@ -28,4 +28,7 @@ public class UsuarioModel {
 
     @Column(name = "email_user")
     private String email;
+
+    @Column(name = "telefone_user")
+    private String telefone;
 }
