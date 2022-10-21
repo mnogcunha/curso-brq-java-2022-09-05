@@ -82,8 +82,9 @@ public class UsuarioService {
     }
 
     // Uso do verbo GET(getOne) com a rota /usuarios/{id}
-    public UsuarioModel getOne(int id) {
-        return usuRepository.findById(id).orElseThrow( () -> new RuntimeException("Usuário não encontrado"));
+    public UsuarioDTO getOne(int id) {
+        UsuarioModel usuario = usuRepository.findById(id).orElseThrow( () -> new RuntimeException("Usuário não encontrado"));
+        return usuario.toDTO();
 //        // Ver se o id existe no banco de dados
 //        Optional<UsuarioModel> usuarioOptional = usuRepository.findById(id);
 //        if(usuarioOptional.isPresent()) {
