@@ -1,8 +1,10 @@
 package com.brq.ms01.models;
 
+import com.brq.ms01.dtos.UsuarioDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 
@@ -31,4 +33,9 @@ public class UsuarioModel {
 
     @Column(name = "telefone_user")
     private String telefone;
+
+    public UsuarioDTO toDTO() {
+        ModelMapper mapper = new ModelMapper();
+        return mapper.map(this, UsuarioDTO.class);
+    }
 }

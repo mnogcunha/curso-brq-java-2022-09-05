@@ -1,5 +1,6 @@
 package com.brq.ms01.controllers;
 
+import com.brq.ms01.dtos.UsuarioDTO;
 import com.brq.ms01.models.UsuarioModel;
 import com.brq.ms01.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class UsuarioController {
 
     // O @PostMapping permite associar o verbo POST com a rota /usuarios
     @PostMapping("usuarios")
-    public UsuarioModel create(@RequestBody UsuarioModel usuario) {
+    public UsuarioDTO create(@RequestBody UsuarioDTO usuario) {
         //   UsuarioModel u = usuServ.create(usuario)
         return usuServ.create(usuario);
     }

@@ -1,5 +1,6 @@
 package com.brq.ms01.services;
 
+import com.brq.ms01.dtos.UsuarioDTO;
 import com.brq.ms01.models.UsuarioModel;
 import com.brq.ms01.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,19 @@ public class UsuarioService {
     }
 
     // Uso do verbo POST com a rota /usuarios
-    public UsuarioModel create(UsuarioModel usuario) {
+    public UsuarioDTO create(UsuarioDTO usuario) {
+
+        // Temos que converter um DTO para um MODEL
+        // jeito Fabrizio (Burro)
+//        UsuarioModel usuarioDTOtoModel = new UsuarioModel();
+//        usuarioDTOtoModel.setId( usuario.getId() );
+//        usuarioDTOtoModel.setNome(usuario.getNome());
+//        usuarioDTOtoModel.setTelefone(usuario.getTelefone());
+//        usuarioDTOtoModel.setEmail(usuario.getEmail());
+
         // INSERT INTO usuarios (name_user, email_user ) VALUEs()....
-        UsuarioModel usur = usuRepository.save(usuario);
-        System.out.println("Criou ID "+usur);
-        return usur;
+        UsuarioModel usuarioSalvo = usuRepository.save( usuario.toModel());
+        return usuarioSalvo.toDTO();
     }
 
     // Uso do verbo PATCH com a rota /usuarios/{id}
