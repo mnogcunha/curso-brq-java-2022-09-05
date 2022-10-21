@@ -35,7 +35,7 @@ public class UsuarioController {
 
     // O @PatchMapping permite associar o verbo PATCH com a rota /usuarios/{id}
     @PatchMapping("usuarios/{id}")
-    public UsuarioModel update(@RequestBody UsuarioModel usuarioBody, @PathVariable int id ) {
+    public UsuarioDTO update(@RequestBody UsuarioDTO usuarioBody, @PathVariable int id ) {
         //        UsuarioModel u = usuService.update(id, usuarioBody);
         //        return u;
         return usuServ.update(id, usuarioBody);

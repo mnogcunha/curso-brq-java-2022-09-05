@@ -13,7 +13,7 @@ public class UsuarioDTO {
     private int id;
     private String nome;
     private String email;
-//    private String telefone;
+    private String telefone;
 
     public UsuarioModel toModel(){
         ModelMapper mapper = new ModelMapper();

@@ -49,14 +49,15 @@ public class UsuarioService {
     }
 
     // Uso do verbo PATCH com a rota /usuarios/{id}
-    public UsuarioModel update(int id, UsuarioModel usuarioBody) {
+    public UsuarioDTO update(int id, UsuarioDTO usuarioBody) {
         UsuarioModel usuario = usuRepository.findById(id)
                 .orElseThrow( () -> new RuntimeException("Usuário não localizado") );
 
         usuario.setEmail( usuarioBody.getEmail() );
         usuario.setNome( usuarioBody.getNome() );
         usuario.setTelefone( usuarioBody.getTelefone() );
-        return usuRepository.save(usuario);
+        UsuarioModel usuarioSalvo = usuRepository.save(usuario.toDTO().toModel());
+        return usuarioSalvo.toDTO();
 
 //        // Ver se o id existe no banco de dados
 //        Optional<UsuarioModel> usuarioOptional = usuRepository.findById(id);
