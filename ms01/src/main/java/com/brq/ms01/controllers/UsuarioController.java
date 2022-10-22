@@ -6,6 +6,7 @@ import com.brq.ms01.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,7 +19,7 @@ public class UsuarioController {
 
     // O @GetMapping permite associoar o verbo GET com a rota /usuarios
     @GetMapping("usuarios")
-    public List<UsuarioModel> getAllUsuarios() {
+    public List<UsuarioDTO> getAllUsuarios() {
 
         usuServ.mostrarMensagemService();
         //   ArrayList<UsuarioModel> usuarios = usuServ.getAllUsuarios();
@@ -28,7 +29,7 @@ public class UsuarioController {
 
     // O @PostMapping permite associar o verbo POST com a rota /usuarios
     @PostMapping("usuarios")
-    public UsuarioDTO create(@RequestBody UsuarioDTO usuario) {
+    public UsuarioDTO create(@Valid @RequestBody UsuarioDTO usuario) {
         //   UsuarioModel u = usuServ.create(usuario)
         return usuServ.create(usuario);
     }

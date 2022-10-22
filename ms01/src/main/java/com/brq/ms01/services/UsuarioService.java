@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 // A camada Service é responsável por armazenar as regras de negócio da aplicação
 @Service
@@ -26,10 +25,18 @@ public class UsuarioService {
     }
 
     // Uso do verbo GET com a rota /usuarios
-    public List<UsuarioModel> getAllUsuarios() {
+    public List<UsuarioDTO> getAllUsuarios() {
         // a repository vai executar : SELECT * FROM usuarios;
         List<UsuarioModel> list = usuRepository.findAll();
-        return list;
+
+        // Como converter uma lista MODEL para lista DTO?
+        List<UsuarioDTO> listDTO = new ArrayList<>();
+
+        // Tipo de variável (carrega ArrayList listaDTO com list (lista UsuarioModel)
+        for (UsuarioModel balde : list) {
+            listDTO.add(balde.toDTO());
+        }
+        return listDTO;
     }
 
     // Uso do verbo POST com a rota /usuarios
@@ -56,8 +63,7 @@ public class UsuarioService {
         usuario.setEmail( usuarioBody.getEmail() );
         usuario.setNome( usuarioBody.getNome() );
         usuario.setTelefone( usuarioBody.getTelefone() );
-        UsuarioModel usuarioSalvo = usuRepository.save(usuario.toDTO().toModel());
-        return usuarioSalvo.toDTO();
+        return usuRepository.save(usuario).toDTO();
 
 //        // Ver se o id existe no banco de dados
 //        Optional<UsuarioModel> usuarioOptional = usuRepository.findById(id);

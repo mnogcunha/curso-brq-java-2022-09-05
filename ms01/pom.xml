@@ -17,45 +17,49 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+		<!-- dependência core para criar serviço web spring boot-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!-- utiliza para gerar código boilerplate-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
             <scope>import</scope>
             <optional>true</optional>
 		</dependency>
+		<!-- ajuda a ter mais velocidade de desenvolvimento-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-
+		<!-- JAVA PERSISTENCE API-->
+		<!-- É uma padronização para manipular dados através do JAVA-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-
+		<!-- dependência do driver do MySQL para o JAVA-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
+		<!-- dependência para validar os dados do DTO -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
-
+		<!-- dependência para converter objetos DTO -> MODEL e MODEL -> DTO -->
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
 			<version>2.4.4</version>
 		</dependency>
-
+		<!-- dependência para criar os testes unitários do spring -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
