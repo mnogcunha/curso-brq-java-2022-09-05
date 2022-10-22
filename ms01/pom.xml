@@ -26,8 +26,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-            <scope>import</scope>
-            <optional>true</optional>
+			<optional>true</optional>
 		</dependency>
 		<!-- ajuda a ter mais velocidade de desenvolvimento-->
 		<dependency>
