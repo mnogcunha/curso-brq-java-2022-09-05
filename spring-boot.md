@@ -1,11 +1,11 @@
 
 # Maven
 
-É um gerenciador de dependências 
+É um gerenciador de dependências
 
 Observar arquivo pom.xml
 
-# Dependências : 
+# Dependências :
 
 ## spring-boot-starter-web
 
@@ -21,8 +21,8 @@ Ajuda a aumentar a velocidade de desenvolvimento dos micro serviços, como por e
 
 Responsável por fazer testes unitários na aplicação.
 
-Um teste unitário é um teste que testa individualmente cada trecho de código. 
-Este teste é automatiza e criado pelo desenvolvedor da aplicação. 
+Um teste unitário é um teste que testa individualmente cada trecho de código.
+Este teste é automatiza e criado pelo desenvolvedor da aplicação.
 
 Veremos neste curso.
 
@@ -61,11 +61,11 @@ Obs: todo endpoint da camada de controller deve ser mapeado com um método
 
 ### Lombok
 
-O Lombok é um boilerplate que gera código repetitivo em tempo de execução. 
+O Lombok é um boilerplate que gera código repetitivo em tempo de execução.
 
 Em geral geramos os construtores, getters, setters e  o método toString()
 
-O Lombok é usado com anotações: 
+O Lombok é usado com anotações:
 
 - **@Data:** faz o papel dos Getters, Setters e toString
 - **@AllArgsConstructor:** criar o construtor com todos os atributos da classe
@@ -74,9 +74,9 @@ O Lombok é usado com anotações:
 
 ## JPA
 
-A especificação JPA define o mapeamento relacional de objetos internamente, em vez de depender das implementações de mapeamento específicas do fornecedor. A JPA representa uma simplificação do modelo de programação de persistência. A especificação JPA define explicitamente o mapeamento relacional de objetos, em vez de depender das implementações de mapeamento específicas do fornecedor. 
+A especificação JPA define o mapeamento relacional de objetos internamente, em vez de depender das implementações de mapeamento específicas do fornecedor. A JPA representa uma simplificação do modelo de programação de persistência. A especificação JPA define explicitamente o mapeamento relacional de objetos, em vez de depender das implementações de mapeamento específicas do fornecedor.
 
-# ORM 
+# ORM
 
 Object Relational Mapping : mapeamento objeto (JAVA) relacional (Banco SQL)
 
@@ -97,9 +97,9 @@ A Injeção de Dependência é uma técnica de desenvolvimento utilizada para ev
 - **@Table:** anotação permite que você especifique os detalhes da tabela que será usada para persistir a entidade no banco de dados
 - **@Column:** é utilizado para especificar a coluna mapeada para uma propriedade ou campo persistente. Se nenhuma anotação de coluna for especificada, os valores padrão serão aplicados.
 - **@RestCotroller:** indica que a classe é um controller que permtite criar uma interface API REST.
-- **@GeneratedValue:** é utilizada para informar a estratégia de geração do valor do identificador único da entidade será gerenciada pelo provedor de persistência. 
-- **GenerationType.IDENTITY:** Informamos ao provedor de persistência que os valores a serem atribuídos ao identificador único serão gerados pela coluna de auto incremento do banco de dados. Assim, um valor para o identificador é gerado para cada registro inserido no banco. Alguns bancos de dados podem não suportar essa opção. 
-- **@Id:** é utilizada para informar ao JPA qual campo/atributo de uma entidade estará relacionado à chave primária da respectiva tabela no banco de dados. 
+- **@GeneratedValue:** é utilizada para informar a estratégia de geração do valor do identificador único da entidade será gerenciada pelo provedor de persistência.
+- **GenerationType.IDENTITY:** Informamos ao provedor de persistência que os valores a serem atribuídos ao identificador único serão gerados pela coluna de auto incremento do banco de dados. Assim, um valor para o identificador é gerado para cada registro inserido no banco. Alguns bancos de dados podem não suportar essa opção.
+- **@Id:** é utilizada para informar ao JPA qual campo/atributo de uma entidade estará relacionado à chave primária da respectiva tabela no banco de dados.
 
 # DTO
 
@@ -121,7 +121,7 @@ modificadorDeAcesso retorno nomeDoMetodo (parametros){
 }
 ```
 
-Ex: 
+Ex:
 ```
 public int soma(int a, int b)
 ```
@@ -137,11 +137,11 @@ int a, int b : parametros
 
 # Exercício - dia 22 de outubro
 
-## Passo a Passo para fazer 
+## Passo a Passo para fazer
 
 **Objetivo:** Criar CRUD de professor
 
-**Campos (colunas):** id, nome, cpf, salário, telefone 
+**Campos (colunas):** id, nome, cpf, salário, telefone
 
 1-) entrar no https://start.spring.io para criar a estrutura básica de um projeto. Nome sugestão: **ms03**
 
@@ -150,10 +150,10 @@ int a, int b : parametros
 **escolher java 11**
 **escolher MAVEN**
 
-2-) no passo 1, escolher as dependências corretas 
-  (spring web, jpa,  mysql, lombok)
+2-) no passo 1, escolher as dependências corretas
+(spring web, jpa,  mysql, lombok)
 
-  Adicionar dependências spring validator e object mapper manualmente no pom.xml
+Adicionar dependências spring validator e object mapper manualmente no pom.xml
 
 3-) baixar o zip gerado no passo anterior e extrair o zip dentro da pasta do seu repositório git
 
@@ -167,7 +167,7 @@ int a, int b : parametros
 
 8-) criar camada de model e suas entidades (não esquecer das entidades)
 
-9-) criar camada repository (repositories) 
+9-) criar camada repository (repositories)
 
 **OBS: é uma interface**
 
@@ -176,4 +176,3 @@ int a, int b : parametros
 11-) criar camada de controller (controllers)- classe
 
 12-) criar collection no POSTMAN com todos os VERBOS
-
