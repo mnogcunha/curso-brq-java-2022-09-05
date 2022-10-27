@@ -67,6 +67,7 @@ public class ResourceExceptionHandler {
         }
 
         log.info(exception.getMessage());
+        log.info("Fabrizio é legal");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationError);
     }

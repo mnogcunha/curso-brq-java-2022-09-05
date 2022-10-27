@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
+import java.util.List;
 
 /*
  * @Data, que faz o papel dos Getters, Setters e toString()
@@ -20,6 +21,7 @@ import javax.persistence.*;
 @Table(name = "usuarios")
 public class UsuarioModel {
 
+    // UUID -> é um conjunto de letras e números para identificar unicamente um registro
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
@@ -34,8 +36,13 @@ public class UsuarioModel {
     @Column(name = "telefone_user")
     private String telefone;
 
-    public UsuarioDTO toDTO() {
+    // no mappedBy guardamos a variável JAVA que mapeia esta entidade (UsuarioModel)
+    @OneToMany(mappedBy = "usuario")
+    private List<FinanciamentoModel> financiamentos;
+
+    public UsuarioDTO toDTO(){
         ModelMapper mapper = new ModelMapper();
+
         return mapper.map(this, UsuarioDTO.class);
     }
 }
