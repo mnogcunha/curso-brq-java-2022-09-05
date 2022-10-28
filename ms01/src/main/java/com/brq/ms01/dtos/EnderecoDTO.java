@@ -5,11 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class FinanciamentoDTO {
+@AllArgsConstructor
+public class EnderecoDTO {
 
     private Integer id;
-    private Integer numeroContrato;
-    private Double valor;
+    private String rua;
+    private String numero;
+    private String cep;
 }

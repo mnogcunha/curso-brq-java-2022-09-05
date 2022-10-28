@@ -63,7 +63,7 @@ public class UsuarioService {
             log.info(usuarioSalvo.toString());
         }
         catch (Exception exception){
-            log.error("Erro ao salvar o usuário: " + exception.getMessage());
+            log.error("Erro ao salvar o financiamento: " + exception.getMessage());
         }
         return usuarioSalvo.toDTO();
 
