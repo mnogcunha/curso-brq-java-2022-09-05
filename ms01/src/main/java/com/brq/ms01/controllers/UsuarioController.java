@@ -4,6 +4,7 @@ import com.brq.ms01.dtos.UsuarioDTO;
 import com.brq.ms01.models.UsuarioModel;
 import com.brq.ms01.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,44 +20,67 @@ public class UsuarioController {
 
     // O @GetMapping permite associoar o verbo GET com a rota /usuarios
     @GetMapping("usuarios")
-    public List<UsuarioDTO> getAllUsuarios() {
+    public ResponseEntity<List<UsuarioDTO>> getAllUsuarios() {
 
         usuServ.mostrarMensagemService();
         //   ArrayList<UsuarioModel> usuarios = usuServ.getAllUsuarios();
         //   return usuarios;
-        return usuServ.getAllUsuarios();
+        var usuarios = usuServ.getAllUsuarios();
+        return ResponseEntity.ok().body(usuarios);
     }
 
     // O @PostMapping permite associar o verbo POST com a rota /usuarios
     @PostMapping("usuarios")
-    public UsuarioDTO create(@Valid @RequestBody UsuarioDTO usuario) {
+    public ResponseEntity<UsuarioDTO> create(@Valid @RequestBody UsuarioDTO usuario) {
         //   UsuarioModel u = usuServ.create(usuario)
-        return usuServ.create(usuario);
+        var in = usuServ.create(usuario);
+        return ResponseEntity.ok() .body(in);
     }
 
     // O @PatchMapping permite associar o verbo PATCH com a rota /usuarios/{id}
     @PatchMapping("usuarios/{id}")
-    public UsuarioDTO update(@RequestBody UsuarioDTO usuarioBody, @PathVariable int id ) {
+    public ResponseEntity<UsuarioDTO> update(@RequestBody UsuarioDTO usuarioBody,
+                                             @PathVariable int id ) {
         //        UsuarioModel u = usuService.update(id, usuarioBody);
         //        return u;
-        return usuServ.update(id, usuarioBody);
+        var up = usuServ.update(id, usuarioBody);
+        return ResponseEntity.ok().body(up);
     }
 
     // O @DeleteMapping permite associar o verbo DELETE com a rota /usuarios/{id}
     @DeleteMapping("usuarios/{id}")
-    public String delete(@PathVariable int id) {
+    public ResponseEntity<String> delete(@PathVariable int id) {
         //String response = usuService.delete(id);
         //return response;
-        return usuServ.delete(id);
+        var d = usuServ.delete(id);
+        return ResponseEntity.ok().body(d);
     }
 
     // O @GetMapping permite associoar o verbo GET(getOne) com a rota /usuarios/{id}
     // busca por apenas um usuário (pelo id)
     @GetMapping("usuarios/{id}")
-    public UsuarioDTO getOne(@PathVariable int id) {
+    public ResponseEntity<UsuarioDTO> getOne(@PathVariable int id) {
         //        UsuarioModel u = usuService.getOne(id);
         //        return u;
-        //
-        return usuServ.getOne(id);
+        var resp = usuServ.getOne(id);
+        return ResponseEntity.ok().body(resp);
+    }
+
+    // usuarios/nome/Fabrizio
+    @GetMapping("usuarios/nome/{nomeBusca}")
+    public ResponseEntity<List<UsuarioDTO>> fetchUsuariosByNome(@PathVariable String nomeBusca){
+        // TODO: Não esquecer do ResponseEntity
+        var list = usuServ.fetchUsuariosByNome(nomeBusca);
+        return ResponseEntity.ok().body(list);
+    }
+
+    // usuarios/nome/Marcelo/email/mno
+    @GetMapping("usuarios/nome/{nomeBusca}/email/{emailBusca}")
+    public ResponseEntity<List<UsuarioDTO>> fetchUsuariosByNomeAndEmail(@PathVariable String nomeBusca,
+                                                                       @PathVariable String emailBusca){
+        // TODO: Não esquecer do ResponseEntity
+        //return usuServ.fetchUsuariosByNomeAndEmail(nomeBusca, emailBusca);
+        var list = usuServ.fetchUsuariosByNomeAndEmail(nomeBusca, emailBusca);
+        return ResponseEntity.ok().body(list);
     }
 }

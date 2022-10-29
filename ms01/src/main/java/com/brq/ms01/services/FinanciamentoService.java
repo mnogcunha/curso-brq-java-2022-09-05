@@ -1,7 +1,9 @@
 package com.brq.ms01.services;
 
 import com.brq.ms01.dtos.FinanciamentoDTO;
+import com.brq.ms01.dtos.UsuarioDTO;
 import com.brq.ms01.models.FinanciamentoModel;
+import com.brq.ms01.models.UsuarioModel;
 import com.brq.ms01.repositories.FinanciamentoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,9 @@ public class FinanciamentoService {
         FinanciamentoModel financiamentoDTOtoModel = new FinanciamentoModel();
         financiamentoDTOtoModel.setNumeroContrato( financiamento.getNumeroContrato() );
         financiamentoDTOtoModel.setValor(financiamento.getValor());
+        UsuarioModel usu = new UsuarioModel();
+        usu.setId(financiamento.getId());
+        //financiamentoDTOtoModel.setUsuario(new UsuarioModel().getId());
         finRepository.save(financiamentoDTOtoModel);
 
 //      FinanciamentoModel financiamentoSalvo = null
