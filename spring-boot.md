@@ -1,4 +1,46 @@
 
+
+# GIT
+
+1-) git add
+
+adiciona as modifições ou novos arquivos
+para que o GIT comece a versionar os mesmos
+
+ex: git add index.html
+
+2-) git commit
+
+adiciona nas moficações para o repositório local
+
+ex: git commit -m "criando nosso primeiro arquivo"
+
+3-) git push
+
+Enviar as modifições do repositório local para o
+repositório remoto
+
+4-) criar nova branch
+
+checkout (apontar para outra branch)
+
+comando: git checkout -b nova-branch
+
+5-) pull
+
+Recupera e atualiza todas as alterações que estão no
+repositório remoto e não estão no repositório local.
+
+6-) MERGE
+
+Possibilita enviar as alterações da branch atualiza
+para uma branch em questão
+
+obs: devemos estar observando a branch de destino e
+usar o merge para a branch de origem
+
+git merge nova-branch
+
 # Maven
 
 É um gerenciador de dependências
@@ -100,6 +142,8 @@ A Injeção de Dependência é uma técnica de desenvolvimento utilizada para ev
 - **@GeneratedValue:** é utilizada para informar a estratégia de geração do valor do identificador único da entidade será gerenciada pelo provedor de persistência.
 - **GenerationType.IDENTITY:** Informamos ao provedor de persistência que os valores a serem atribuídos ao identificador único serão gerados pela coluna de auto incremento do banco de dados. Assim, um valor para o identificador é gerado para cada registro inserido no banco. Alguns bancos de dados podem não suportar essa opção.
 - **@Id:** é utilizada para informar ao JPA qual campo/atributo de uma entidade estará relacionado à chave primária da respectiva tabela no banco de dados.
+- **@ControllerAdvice**: permite manipular exceções de forma global. Para cada tipo de exceção, podemos manipular desde o status até a mensagem de retorno.
+
 
 # DTO
 
@@ -176,3 +220,21 @@ Adicionar dependências spring validator e object mapper manualmente no pom.xml
 11-) criar camada de controller (controllers)- classe
 
 12-) criar collection no POSTMAN com todos os VERBOS
+
+# Relacionamentos JPA
+
+# 1 para N (@OneToMany e @ManyToOne)
+
+- criar relacionamento entre as classes JAVA com as anotações @OneToMany e @ManyToOne nas respectivas entidades
+- Na entidade (tabela de dados) que possui a chave estrangeira, colocar a anotação @JoinTable
+- Na outra entidade, usar o mapped by
+
+# 1-1 (@OneToOne)
+
+- criar relacionamento entre as classes JAVA com as anotações @OneToOne
+- Na entidade (tabela de dados) que possui a chave estrangeira, colocar a anotação @JoinTable
+- Na outra entidade, usar o mapped by
+
+
+
+

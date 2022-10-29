@@ -77,10 +77,23 @@ public class UsuarioController {
     // usuarios/nome/Marcelo/email/mno
     @GetMapping("usuarios/nome/{nomeBusca}/email/{emailBusca}")
     public ResponseEntity<List<UsuarioDTO>> fetchUsuariosByNomeAndEmail(@PathVariable String nomeBusca,
-                                                                       @PathVariable String emailBusca){
+                                                                        @PathVariable String emailBusca){
         // TODO: Não esquecer do ResponseEntity
         //return usuServ.fetchUsuariosByNomeAndEmail(nomeBusca, emailBusca);
         var list = usuServ.fetchUsuariosByNomeAndEmail(nomeBusca, emailBusca);
+        return ResponseEntity.ok().body(list);
+    }
+
+    // usuarios/nome/Marcelo/email/mno
+    @GetMapping("usuarios/nome/{nomeBusca}/email/{emailBusca}/rua/{ruaBusca}")
+    public ResponseEntity<List<UsuarioDTO>> findByNomeContainsAndEmailContainsAndEnderecoRuaContains(@PathVariable String nomeBusca,
+                                                                                                     @PathVariable String emailBusca,
+                                                                                                     @PathVariable String ruaBusca){
+        // TODO: Não esquecer do ResponseEntity
+        //return usuServ.findByNomeContainsAndEmailContainsAndEnderecoRuaContains(nomeBusca, emailBusca, ruaBusca);
+        var list = usuServ.findByNomeContainsAndEmailContainsAndEnderecoRuaContains(nomeBusca,
+                                                                                                   emailBusca,
+                                                                                                   ruaBusca);
         return ResponseEntity.ok().body(list);
     }
 }

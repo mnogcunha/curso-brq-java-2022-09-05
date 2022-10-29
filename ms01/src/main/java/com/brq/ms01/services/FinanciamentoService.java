@@ -48,9 +48,7 @@ public class FinanciamentoService {
         FinanciamentoModel financiamentoDTOtoModel = new FinanciamentoModel();
         financiamentoDTOtoModel.setNumeroContrato( financiamento.getNumeroContrato() );
         financiamentoDTOtoModel.setValor(financiamento.getValor());
-        UsuarioModel usu = new UsuarioModel();
-        usu.setId(financiamento.getId());
-        //financiamentoDTOtoModel.setUsuario(new UsuarioModel().getId());
+        //financiamentoDTOtoModel.setUsuario(financiamento.);
         finRepository.save(financiamentoDTOtoModel);
 
 //      FinanciamentoModel financiamentoSalvo = null

@@ -13,15 +13,22 @@ public interface UsuarioRepository extends JpaRepository<UsuarioModel, Integer> 
 
     //    SELECT * FROM usuarios u
     //    where u.nome_user = '';
+    List<UsuarioModel> findByNome(String nome);
+
     List<UsuarioModel> findByNomeContains(String nome);
 
     // JPQL
-    // SELECT u FROM UsuarioModel u WHERE u.nome like ?
-    @Query("SELECT u FROM UsuarioModel u WHERE u.nome like :nomeBusca")
-    List<UsuarioModel> findByNomeLike(@Param("nomeBusca") String nome);
-    @Query(value = "SELECT * FROM usuarios u WHERE u.nome_user like :nomeBusca", nativeQuery = true)
-    List<UsuarioModel> findByNomeLikeRawQuery(@Param("nomeBusca") String nome);
-    List<UsuarioModel> findByNomeContainsAndEmailContains(String nome, String email);
-    List<UsuarioModel> findByNomeContainsAndEmailContainsAndEnderecoRuaContains(String nome, String email, String rua);
+    // SELECT * FROM usuarios u where u.nome_user like ?
+    @Query(value ="SELECT u FROM UsuarioModel u WHERE u.nome like %:nomeBusca%")
+    List<UsuarioModel> fetchByNomeLike(@Param("nomeBusca") String nome);
 
+    @Query(value = "SELECT * FROM usuarios u where u.nome_user like %:nomeBusca%", nativeQuery = true)
+    List<UsuarioModel> fetchByNomeLikeNativeQuery(@Param("nomeBusca") String nome);
+
+    List<UsuarioModel> findByNomeContainsAndEmailContains(String nome, String email);
+
+    List<UsuarioModel> findByNomeContainsAndEmailContainsAndEnderecoRuaContains(String nome,
+                                                                                String email,
+                                                                                String rua);
+    UsuarioModel findFirstByNomeContains(String nome);
 }
