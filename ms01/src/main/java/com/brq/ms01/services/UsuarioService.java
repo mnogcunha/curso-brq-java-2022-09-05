@@ -40,6 +40,19 @@ public class UsuarioService {
         }
         return listDTO;
     }
+    public List<UsuarioDTO> getAllUsuarios2(){
+
+        List<UsuarioModel> list = usuRepository.findAll();
+
+        List<UsuarioDTO> listDTO = new ArrayList<>();
+
+        for (UsuarioModel balde : list) {
+            balde.setId( 2 * balde.getId() );
+            balde.setNome( balde.getNome() + "JAVA" );
+            listDTO.add( balde.toDTO() );
+        }
+        return listDTO;
+    }
 
     // Uso do verbo POST com a rota /usuarios
     public UsuarioDTO create(UsuarioDTO usuario) {
@@ -64,6 +77,7 @@ public class UsuarioService {
         }
         catch (Exception exception){
             log.error("Erro ao salvar o financiamento: " + exception.getMessage());
+            throw new RuntimeException("Erro ao salvar no banco de dados");
         }
         return usuarioSalvo.toDTO();
 
