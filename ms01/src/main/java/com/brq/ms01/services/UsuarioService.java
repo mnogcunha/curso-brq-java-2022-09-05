@@ -1,6 +1,7 @@
 package com.brq.ms01.services;
 
 import com.brq.ms01.dtos.UsuarioDTO;
+import com.brq.ms01.exceptions.DataCreateException;
 import com.brq.ms01.models.UsuarioModel;
 import com.brq.ms01.repositories.UsuarioRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -70,24 +71,20 @@ public class UsuarioService {
         try{
             // INSERT INTO usuarios (name_user, email_user ) VALUEs()....
             usuarioSalvo = usuRepository.save( usuario.toModel() );
-            // return  usuRepository.save( usuario );
-            // return "POST Usuários";
-            //return usuario;
             log.info(usuarioSalvo.toString());
+            return usuarioSalvo.toDTO();
         }
         catch (Exception exception){
-            log.error("Erro ao salvar o financiamento: " + exception.getMessage());
-            throw new RuntimeException("Erro ao salvar no banco de dados");
+            log.error("Erro ao salvar o usuario: " + exception.getMessage());
+            //hrow new RuntimeException("Erro ao salvar no banco de dados");
+            throw new DataCreateException("Erro ao salvar usuário");
         }
-        return usuarioSalvo.toDTO();
-
-        // INSERT INTO usuarios (name_user, email_user ) VALUEs()....
-        //UsuarioModel usuarioSalvo = usuRepository.save( usuario.toModel());
-        //return usuarioSalvo.toDTO();
     }
 
     // Uso do verbo PATCH com a rota /usuarios/{id}
     public UsuarioDTO update(int id, UsuarioDTO usuarioBody) {
+
+        // TODO: Fazer uma exceção para quando não encontrar o dado, Sugestão: ObjNotFountException. Retornar status 404
         UsuarioModel usuario = usuRepository.findById(id)
                 .orElseThrow( () -> new RuntimeException("Usuário não localizado") );
 
@@ -114,6 +111,10 @@ public class UsuarioService {
 
     // Uso do verbo DELETE com a rota /usuarios/{id}
     public String delete(int id) {
+
+        usuRepository.findById(id)
+                .orElseThrow( () -> new RuntimeException("Usuário não localizado") );
+
         usuRepository.deleteById(id);
         return "Usuário delatado com sucesso!";
     }

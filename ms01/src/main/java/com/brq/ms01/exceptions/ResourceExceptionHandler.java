@@ -24,7 +24,7 @@ public class ResourceExceptionHandler {
     // Gostaria que o método abaixo trate exceções do tipo de validação de dados
     @ExceptionHandler(MethodArgumentNotValidException.class)
     // ResponseEntity permite retornar o status, headers e dados do body da requisição para o cliente
-    public ResponseEntity<StandardError> methodValidationHandler (
+    public ResponseEntity<StandardError> methodValidationHandler(
             MethodArgumentNotValidException exception,
             HttpServletRequest request) {
 
@@ -44,7 +44,7 @@ public class ResourceExceptionHandler {
 
         ValidationError validationError = new ValidationError();
 
-        validationError.setTimestamp(new Date( System.currentTimeMillis() ));
+        validationError.setTimestamp(new Date(System.currentTimeMillis()));
         validationError.setStatus(HttpStatus.BAD_REQUEST.value());
         validationError.setError("Validation Error");
         // validationError.setMessage(exception.getMessage());
@@ -55,7 +55,7 @@ public class ResourceExceptionHandler {
         List<FieldError> listErrors = exception.getBindingResult().getFieldErrors();
 
         // para cada erro da exceção:
-        for(FieldError err : listErrors) {
+        for (FieldError err : listErrors) {
 
             //crio m obj FieldMessage com o nome do campo e o erro retornado do mesmo
             FieldMessage fm = new FieldMessage();
@@ -63,12 +63,25 @@ public class ResourceExceptionHandler {
             fm.setMessage(err.getDefaultMessage());
 
             // adiciono o campo e seu respectivo erro no atributo ERRORS do retorno
-            validationError.getErrors().add( fm );
+            validationError.getErrors().add(fm);
         }
 
         log.info(exception.getMessage());
         log.info("Fabrizio é legal");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationError);
+    }
+
+    @ExceptionHandler(DataCreateException.class)
+    public ResponseEntity<StandardError> dataCreateExceptionHandler(DataCreateException exception,
+                                                                    HttpServletRequest request){
+        StandardError standardError = new StandardError();
+        standardError.setTimestamp(new Date());
+        standardError.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        standardError.setError("Erro ao inserir o registro");
+        standardError.setMessage(exception.getMessage());
+        standardError.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(standardError);
     }
 }
