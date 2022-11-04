@@ -1,24 +1,21 @@
 package com.brq.ms01.dtos;
 
 import com.brq.ms01.models.FinanciamentoModel;
-import com.brq.ms01.models.UsuarioModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FinanciamentoDTO {
+public class FinanciamentoNewDTO {
 
     private Integer id;
     private Integer numeroContrato;
     private Double valor;
 
-    private UsuarioDTO usuario;
+    private Integer user;
 
     public FinanciamentoModel toModel(){
 

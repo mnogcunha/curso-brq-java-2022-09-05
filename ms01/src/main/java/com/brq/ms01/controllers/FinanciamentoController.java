@@ -1,6 +1,7 @@
 package com.brq.ms01.controllers;
 
 import com.brq.ms01.dtos.FinanciamentoDTO;
+import com.brq.ms01.dtos.FinanciamentoNewDTO;
 import com.brq.ms01.services.FinanciamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class FinanciamentoController {
 
     // O @PostMapping permite associar o verbo POST com a rota /financiamentos
     @PostMapping("financiamentos")
-    public FinanciamentoDTO create(@Valid @RequestBody FinanciamentoDTO financiamento) {
+    public FinanciamentoDTO create(@Valid @RequestBody FinanciamentoNewDTO financiamento) {
         //   UsuarioModel u = usuServ.create(usuario)
         return finServ.create(financiamento);
     }

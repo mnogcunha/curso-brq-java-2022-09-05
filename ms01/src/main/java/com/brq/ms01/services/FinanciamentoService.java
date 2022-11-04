@@ -1,10 +1,12 @@
 package com.brq.ms01.services;
 
 import com.brq.ms01.dtos.FinanciamentoDTO;
+import com.brq.ms01.dtos.FinanciamentoNewDTO;
 import com.brq.ms01.dtos.UsuarioDTO;
 import com.brq.ms01.models.FinanciamentoModel;
 import com.brq.ms01.models.UsuarioModel;
 import com.brq.ms01.repositories.FinanciamentoRepository;
+import com.brq.ms01.repositories.UsuarioRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,9 @@ public class FinanciamentoService {
 
     @Autowired
     private FinanciamentoRepository finRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     public void mostrarMensagemService() {
         System.out.println("Mensagem do servico");
@@ -43,14 +48,16 @@ public class FinanciamentoService {
     }
 
     // Uso do verbo POST com a rota /usuarios
-    public FinanciamentoDTO create(FinanciamentoDTO financiamento) {
+    public FinanciamentoDTO create(FinanciamentoNewDTO financiamento) {
 
+        UsuarioModel usuarioModel = usuarioRepository.findById(financiamento.getUser())
+                .orElseThrow( () -> new RuntimeException("Usuário não encontrado"));
         FinanciamentoModel financiamentoDTOtoModel = new FinanciamentoModel();
         financiamentoDTOtoModel.setNumeroContrato( financiamento.getNumeroContrato() );
         financiamentoDTOtoModel.setValor(financiamento.getValor());
-        financiamentoDTOtoModel.setUsuario(financiamento.toModel().getUsuario());
-        
-        finRepository.save(financiamentoDTOtoModel);
+        financiamentoDTOtoModel.setUsuario(usuarioModel);
+
+        return finRepository.save(financiamentoDTOtoModel).toDTO();
 
 //      FinanciamentoModel financiamentoSalvo = null
 //
@@ -62,7 +69,7 @@ public class FinanciamentoService {
 //            log.error("Erro ao salvar o financiamento: " + exception.getMessage());
 //        }
 
-        return financiamentoDTOtoModel.toDTO();
+//        return financiamentoDTOtoModel.toDTO();
     }
 
     // Uso do verbo PATCH com a rota /usuarios/{id}
