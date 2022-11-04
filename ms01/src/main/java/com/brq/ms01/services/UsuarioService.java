@@ -152,13 +152,12 @@ public class UsuarioService {
         for (UsuarioModel balde : list) {
             listDTO.add( balde.toDTO() );
         }
-
         return listDTO;
     }
 
     public List<UsuarioDTO> fetchUsuariosByNomeAndEmail(String nomeBusca, String emailBusca) {
 
-        //List<UsuarioModel> list = usuRepository.findByNome(nomeBusca);
+        //List<UsuarioModel> list = usuRepository.findByNomeAndEmail(nomeBusca, emailBusca);
         List<UsuarioModel> list = usuRepository.findByNomeContainsAndEmailContains(nomeBusca, emailBusca);
 
         List<UsuarioDTO> listDTO = new ArrayList<>();
@@ -167,17 +166,18 @@ public class UsuarioService {
         for (UsuarioModel balde : list) {
             listDTO.add(balde.toDTO());
         }
-
         return listDTO;
     }
+
         public List<UsuarioDTO> findByNomeContainsAndEmailContainsAndEnderecoRuaContains(String nomeBusca,
                                                                                          String emailBusca,
                                                                                          String ruaBusca){
 
             //List<UsuarioModel> list = usuRepository.findByNome(nomeBusca);
-            List<UsuarioModel> list = usuRepository.findByNomeContainsAndEmailContainsAndEnderecoRuaContains(nomeBusca,
-                                                                                                             emailBusca,
-                                                                                                             ruaBusca);
+            List<UsuarioModel> list =
+                    usuRepository.findByNomeContainsAndEmailContainsAndEnderecoRuaContains(nomeBusca,
+                                                                                           emailBusca,
+                                                                                           ruaBusca);
 
             List<UsuarioDTO> listDTO = new ArrayList<>();
 

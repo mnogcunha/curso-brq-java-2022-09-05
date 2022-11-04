@@ -1,8 +1,11 @@
 package com.brq.ms01.models;
 
+import com.brq.ms01.dtos.ConsorcioDTO;
+import com.brq.ms01.dtos.FinanciamentoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,4 +33,10 @@ public class ConsorcioModel {
 
     @ManyToMany(mappedBy = "consorcios")
     private List<UsuarioModel> usuarios;
+
+    public ConsorcioDTO toDTO(){
+        ModelMapper mapper = new ModelMapper();
+
+        return mapper.map(this, ConsorcioDTO.class);
+    }
 }

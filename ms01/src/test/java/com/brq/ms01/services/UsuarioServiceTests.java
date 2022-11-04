@@ -2,6 +2,7 @@ package com.brq.ms01.services;
 
 import com.brq.ms01.dtos.UsuarioDTO;
 import com.brq.ms01.exceptions.DataCreateException;
+import com.brq.ms01.models.EnderecoModel;
 import com.brq.ms01.models.UsuarioModel;
 import com.brq.ms01.repositories.UsuarioRepository;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -281,5 +283,104 @@ public class UsuarioServiceTests {
         // Verificar se vai estourar exceção
         assertThrows( RuntimeException.class ,
                 () -> usuarioService.getOne(id) );
+    }
+
+    @Test
+    void fetchUsuariosByNomeTest(){
+
+        String nomeBusca = "aaa";
+
+        UsuarioModel usuario = new UsuarioModel();
+        usuario.setEmail("email");
+        usuario.setTelefone("telefone");
+        usuario.setNome("nome");
+
+        List<UsuarioModel> listUsuariosMockados = Arrays.asList( usuario );
+
+        // Mockando a camada repository
+        when(usuarioRepository.fetchByNomeLikeNativeQuery(nomeBusca))
+                .thenReturn(listUsuariosMockados);
+
+        // chamar o método a ser testado
+        List<UsuarioDTO> dtos = usuarioService.fetchUsuariosByNome(nomeBusca);
+
+        // Verificar se o retorno é o esperado
+        assertThat( dtos.get(0).getTelefone() )
+                .isEqualTo(listUsuariosMockados.get(0).getTelefone());
+        assertThat( dtos.get(0).getEmail() )
+                .isEqualTo(listUsuariosMockados.get(0).getEmail());
+        assertThat( dtos.get(0).getNome() )
+                .isEqualTo(listUsuariosMockados.get(0).getNome());
+        assertThat( dtos.isEmpty() ).isEqualTo(false);
+    }
+
+    @Test
+    void fetchUsuariosByNomeAndEmailTest(){
+
+        String nomeBusca = "nome-busca";
+        String emailBusca = "email-busca";
+
+        UsuarioModel usuario = new UsuarioModel();
+        usuario.setEmail("email");
+        usuario.setTelefone("telefone");
+        usuario.setNome("nome");
+
+        List<UsuarioModel> listUsuariosMockados = Arrays.asList( usuario );
+
+        when(usuarioRepository.findByNomeContainsAndEmailContains(nomeBusca, emailBusca))
+                .thenReturn(listUsuariosMockados);
+
+        // Chamar o método a ser testado
+        List<UsuarioDTO> dtos = usuarioService.fetchUsuariosByNomeAndEmail(nomeBusca, emailBusca);
+
+        // Verificar se o método está correto
+        assertThat( dtos.get(0).getTelefone() )
+                .isEqualTo(listUsuariosMockados.get(0).getTelefone());
+        assertThat( dtos.get(0).getEmail() )
+                .isEqualTo(listUsuariosMockados.get(0).getEmail());
+        assertThat( dtos.get(0).getNome() )
+                .isEqualTo(listUsuariosMockados.get(0).getNome());
+        assertThat( dtos.isEmpty() ).isEqualTo(false);
+    }
+
+    @Test
+    void findByNomeContainsAndEmailContainsAndEnderecoRuaContainsTest(){
+
+        String nomeBusca = "nome-busca";
+        String emailBusca = "email-busca";
+        String enderecoBusca = "endereco-busca";
+
+        UsuarioModel usuario = new UsuarioModel();
+        usuario.setEmail("email");
+        usuario.setTelefone("telefone");
+        usuario.setNome("nome");
+        EnderecoModel endereco = new EnderecoModel();
+        endereco.setRua("endereco");
+        usuario.setEndereco(endereco);
+
+        List<UsuarioModel> listUsuariosMockados = Arrays.asList( usuario );
+
+        when(usuarioRepository.findByNomeContainsAndEmailContainsAndEnderecoRuaContains(nomeBusca,
+                                                                                        emailBusca,
+                                                                                        enderecoBusca))
+                .thenReturn(listUsuariosMockados);
+
+        // Chamar o método a ser testado
+        List<UsuarioDTO> dtos =
+                usuarioService.findByNomeContainsAndEmailContainsAndEnderecoRuaContains(nomeBusca,
+                                                                                        emailBusca,
+                                                                                        enderecoBusca);
+
+
+        // Verificar se o método está correto
+        assertThat( dtos.get(0).getTelefone() )
+                .isEqualTo(listUsuariosMockados.get(0).getTelefone());
+        assertThat( dtos.get(0).getEmail() )
+                .isEqualTo(listUsuariosMockados.get(0).getEmail());
+        assertThat( dtos.get(0).getNome() )
+                .isEqualTo(listUsuariosMockados.get(0).getNome());
+        assertThat( dtos.get(0).getEndereco().getRua() )
+                .isEqualTo(listUsuariosMockados.get(0).getEndereco().getRua());
+        assertThat( dtos.isEmpty() ).isEqualTo(false);
     }
 }
