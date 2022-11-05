@@ -1,8 +1,7 @@
 package com.brq.ms01.controllers;
 
 import com.brq.ms01.dtos.UsuarioDTO;
-import com.brq.ms01.models.UsuarioModel;
-import com.brq.ms01.services.UsuarioService;
+import com.brq.ms01.services.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ public class UsuarioController {
     // private UsuarioService usuServ = new UsuarioService(); (usado conforme abaixo)
     // @Autowired é importante pois permite que o Spring "instancie" o objeto do tipo UsuarioService
     @Autowired
-    private UsuarioService usuServ;
+    private IUsuarioService usuServ;
 
     // O @GetMapping permite associoar o verbo GET com a rota /usuarios
     @GetMapping("usuarios")
@@ -24,7 +23,6 @@ public class UsuarioController {
 
         usuServ.mostrarMensagemService();
         //   ArrayList<UsuarioModel> usuarios = usuServ.getAllUsuarios();
-        //   return usuarios;
         var usuarios = usuServ.getAllUsuarios();
         return ResponseEntity.ok().body(usuarios);
     }
@@ -42,7 +40,6 @@ public class UsuarioController {
     public ResponseEntity<UsuarioDTO> update(@RequestBody UsuarioDTO usuarioBody,
                                              @PathVariable int id ) {
         //        UsuarioModel u = usuService.update(id, usuarioBody);
-        //        return u;
         var up = usuServ.update(id, usuarioBody);
         return ResponseEntity.ok().body(up);
     }

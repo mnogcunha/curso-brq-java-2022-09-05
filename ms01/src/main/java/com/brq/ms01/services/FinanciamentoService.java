@@ -2,7 +2,6 @@ package com.brq.ms01.services;
 
 import com.brq.ms01.dtos.FinanciamentoDTO;
 import com.brq.ms01.dtos.FinanciamentoNewDTO;
-import com.brq.ms01.dtos.UsuarioDTO;
 import com.brq.ms01.models.FinanciamentoModel;
 import com.brq.ms01.models.UsuarioModel;
 import com.brq.ms01.repositories.FinanciamentoRepository;
@@ -28,8 +27,9 @@ public class FinanciamentoService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public void mostrarMensagemService() {
-        System.out.println("Mensagem do servico");
+    public void mostrarMensagemService(){
+        //System.out.println("Mensagem do serviço");
+        log.info("Mensagem do serviço");
     }
 
     // Uso do verbo GET com a rota /usuarios

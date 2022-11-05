@@ -10,7 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
@@ -19,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
@@ -29,7 +29,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class UsuarioServiceTests {
+class UsuarioServiceTests {
 
     // Primeiro temos que instanciar a classe de desejo do teste
     @Autowired
@@ -122,7 +122,7 @@ public class UsuarioServiceTests {
         // Verificar se está correto
         assertThat(salvoDTO.getNome()).isEqualTo(nome);
         assertThat(salvoDTO.getEmail()).isEqualTo(email);
-        assertThat(salvoDTO.getId()).isGreaterThan(0);
+        assertThat(salvoDTO.getId()).isPositive();
     }
     @Test
     void createWhenFail(){
@@ -311,7 +311,7 @@ public class UsuarioServiceTests {
                 .isEqualTo(listUsuariosMockados.get(0).getEmail());
         assertThat( dtos.get(0).getNome() )
                 .isEqualTo(listUsuariosMockados.get(0).getNome());
-        assertThat( dtos.isEmpty() ).isEqualTo(false);
+        assertThat( dtos.isEmpty() ).isFalse();
     }
 
     @Test
@@ -340,7 +340,7 @@ public class UsuarioServiceTests {
                 .isEqualTo(listUsuariosMockados.get(0).getEmail());
         assertThat( dtos.get(0).getNome() )
                 .isEqualTo(listUsuariosMockados.get(0).getNome());
-        assertThat( dtos.isEmpty() ).isEqualTo(false);
+        assertThat( dtos.isEmpty() ).isFalse();
     }
 
     @Test
@@ -381,6 +381,12 @@ public class UsuarioServiceTests {
                 .isEqualTo(listUsuariosMockados.get(0).getNome());
         assertThat( dtos.get(0).getEndereco().getRua() )
                 .isEqualTo(listUsuariosMockados.get(0).getEndereco().getRua());
-        assertThat( dtos.isEmpty() ).isEqualTo(false);
+        assertThat( dtos.isEmpty() ).isFalse();
+    }
+
+    @Test
+    void mostrarMensagemServiceTest(){
+
+        assertDoesNotThrow( () -> usuarioService.mostrarMensagemService() );
     }
 }

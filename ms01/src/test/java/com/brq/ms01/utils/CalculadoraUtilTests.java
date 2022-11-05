@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 * SpringExtension.class permite integração do Spring Boot com o Junit
 */
 @ExtendWith(SpringExtension.class)
-public class CalculadoraUtilTests {
+class CalculadoraUtilTests {
     private CalculadoraUtil calculadoraUtil = new CalculadoraUtil();
 
     @Test

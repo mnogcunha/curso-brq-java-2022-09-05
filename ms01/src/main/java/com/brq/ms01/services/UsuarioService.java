@@ -14,17 +14,14 @@ import java.util.List;
 // A camada Service é responsável por armazenar as regras de negócio da aplicação
 @Slf4j
 @Service
-public class UsuarioService {
-
-    // Este ArrayList é didático, pois está simulando um banco de dados
-    private ArrayList<UsuarioModel> usuarios = new ArrayList<>();
-    private int counter = 1;
+public class UsuarioService  implements IUsuarioService{
 
     @Autowired
     private UsuarioRepository usuRepository;
 
-    public void mostrarMensagemService() {
-        System.out.println("Mensagem do servico");
+    public void mostrarMensagemService(){
+        //System.out.println("Mensagem do serviço");
+        log.info("Mensagem do serviço");
     }
 
     // Uso do verbo GET com a rota /usuarios
@@ -112,8 +109,11 @@ public class UsuarioService {
     // Uso do verbo DELETE com a rota /usuarios/{id}
     public String delete(int id) {
 
-        usuRepository.findById(id)
+        final var usuario = usuRepository.findById(id)
                 .orElseThrow( () -> new RuntimeException("Usuário não localizado") );
+
+        log.info("deletando usuário id: {} com sucesso, email : {}",
+                usuario.getId(), usuario.getEmail() );
 
         usuRepository.deleteById(id);
         return "Usuário delatado com sucesso!";
