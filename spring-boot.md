@@ -235,6 +235,25 @@ Adicionar dependências spring validator e object mapper manualmente no pom.xml
 - Na entidade (tabela de dados) que possui a chave estrangeira, colocar a anotação @JoinTable
 - Na outra entidade, usar o mapped by
 
+# @Component
+
+Antes de podermos entender o valor de **@Component**, primeiro precisamos entender um pouco sobre o Spring ApplicationContext.
+
+Spring ApplicationContext é onde Spring mantém instâncias de objetos que ele identificou para serem gerenciados e distribuídos automaticamente. Estes são chamados de **BEANS** (@Beans).
+
+O gerenciamento do bean e a injeção de dependência são alguns dos principais recursos do Spring.
+
+Usando o princípio de Inversão de Controle, o Spring coleta as instâncias do bean de nosso aplicativo e os usam no momento apropriado. Podemos mostrar as dependências dos bean para Spring sem precisar lidar com a configuração e instanciação desses objetos.
+
+A capacidade de usar anotações como **@Autowired** para injetar beans gerenciados pelo Spring em nosso aplicativo é uma força motriz para a criação do nosso código no Spring.
 
 
+- @Component
 
+@Component é uma anotação que permite o Spring detectar automaticamente nossos beans personalizados.
+
+Em outras palavras, sem ter que escrever nenhum código explícito, o Spring irá:
+
+- Examinar nosso aplicativo para classes anotadas com @Component
+- Instanciar e injetar quaisquer dependências especificadas neles (com classes dos objetos @Component)
+- Injetar os objetos na nossa aplicação sempre que necessário
