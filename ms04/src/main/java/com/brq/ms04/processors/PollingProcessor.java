@@ -14,8 +14,13 @@ public class PollingProcessor implements Processor {
 
         final var objectMapper = new ObjectMapper();
 
-        final var cotacao = objectMapper
+        var cotacao = objectMapper
                 .readValue(messageIn, CotacaoUSD.class);
+
+        cotacao.getUSDBRL()
+                .setCode( cotacao.getUSDBRL().getCode() + "-BRQ" );
+
+        exchange.getIn().setBody(cotacao);
 
         System.out.println("GET OUT " + cotacao);
     }
