@@ -1,11 +1,11 @@
 package com.brq.ms04.routes;
 
+import com.brq.ms04.beans.USDBRLBean;
 import com.brq.ms04.processors.PollingProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
 @Slf4j
 @Component
 public class PollingRoute extends RouteBuilder {
@@ -16,15 +16,16 @@ public class PollingRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        log.info("o valor da url é {}", url);
+        log.info("O valor da URL é {}", url);
 
-        // Após o caracter "?" podemos colocar os parametros do conector
+        // após o caracter ?, podemos colocar os parâmetros do conector do camel
         // ex: period=5000 -> executar a cada 5 segundos
         from("timer:polling?period=5000")
-
-                // .to("http://economia.awesomeapi.com.br/json/last/USD-BRL")
+                //.to("https://economia.awesomeapi.com.br/json/last/USD-BRL")
                 .to(url)
-                .process( new PollingProcessor())
+                .bean(USDBRLBean.class, "save")
+                //.process( new PollingProcessor() )
+                //.process( new PollingProcessor2() )
                 .log("${body}");
     }
 }

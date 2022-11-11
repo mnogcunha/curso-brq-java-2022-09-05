@@ -1,4 +1,4 @@
-package com.brq.ms04.models;
+package com.brq.ms04.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CotacaoUSD {
+public class CotacaoUSDDTO {
 
     @JsonProperty("USDBRL")
-    private USDBRL uSDBRL;
+    private USDBRLDTO uSDBRL;
 }
