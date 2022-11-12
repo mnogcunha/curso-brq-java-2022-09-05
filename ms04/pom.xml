@@ -15,6 +15,8 @@
 	<description>Spring Boot + Apache Camel</description>
 	<properties>
 		<java.version>11</java.version>
+		<camel.version>3.5.0</camel.version>
+		<objectmapper.version>2.3.5</objectmapper.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -26,26 +28,31 @@
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-spring-boot-starter</artifactId>
-			<version>3.18.1</version>
+			<version>${camel.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-jackson</artifactId>
-			<version>3.19.0</version>
+			<version>${camel.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-http-starter</artifactId>
-			<version>3.16.0</version>
+			<version>${camel.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-activemq-starter</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
-			<version>2.3.5</version>
+			<version>${objectmapper.version}</version>
 		</dependency>
 
 		<!--		dependência do JPA para acesso ao banco de dados relacional-->
@@ -67,11 +74,13 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
