@@ -7,15 +7,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ms01" />
+        <module name="ms05" />
         <module name="ms04" />
         <module name="ms03" />
+        <module name="ms01" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ms01" target="11" />
       <module name="ms03" target="11" />
       <module name="ms04" target="11" />
+      <module name="ms05" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -23,6 +25,7 @@
       <module name="ms01" options="-parameters" />
       <module name="ms03" options="-parameters" />
       <module name="ms04" options="-parameters" />
+      <module name="ms05" options="-parameters" />
     </option>
   </component>
 </project>

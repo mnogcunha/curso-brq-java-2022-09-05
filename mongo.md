@@ -27,8 +27,10 @@ Mongo container:
 
 ## Trazer todos maiores de idade
 
+idade >= 18
+
 ```
-    {idade: {$gte: 18}}
+    { idade: {$gte: 18} }
 ```
 
 ## Combinar filtros usando vírgulas dentro do documento passado por parâmetro
@@ -39,12 +41,13 @@ Mongo container:
 
 ## Outros operadores
 
+- $gte: >=
 - $eq: exatamente igual (=)
 - $ne: diferente (<> ou !=)
 - $gt: maior do que (>)
 - $lt: menor do que (<)
 - $lte: menor ou igual a (<=)
-- $in: o valor está contido em um array de possibilidades, como em um OU. Ex{idade: {$in: [10,12] }}
+- $in: o valor está contido em um array de possibilidades, como em um OU. Ex: { idade: { $in: [10,12] } }
 
 # Mongosh
 
@@ -57,17 +60,18 @@ Mongo container:
 - Inserir um usuário:
 
 ```
-    db.usuarios.insert({ nome: "Fabrizio Mongo SH", email : "sh@sh.com" })
+    db.usuarios.insertOne( { nome: "Fabrizio Mongo SH", email : "sh@sh.com" } )
 ```
 
 - Inserir vários usuários:
 
 ```
-    db.usuarios.insert(
+    db.usuarios.insertMany(
         [
             { nome: "Fabrizio Mongo SH 1", email : "sh1@sh.com" },
             { nome: "Fabrizio Mongo SH 2", email : "sh2@sh.com" },
-            { nome: "Fabrizio Mongo SH 3", email : "sh3@sh.com" }
+            { nome: "Fabrizio Mongo SH 3", email : "sh3@sh.com" },
+            { nombre: "Fabrizio Mongo SH 3", email : "sh3@sh.com", salario : 1001 },
         ]  
     )
 ```
@@ -78,7 +82,7 @@ Mongo container:
     db.usuarios.find({nome: "Fabrizio Mongo SH"})
 ```
 
-- procurar um usuário pelo nome com letra b
+- procurar um usuário pelo nome com a frase SH
 
 ```
     db.usuarios.find({nome: { $regex: /SH/ } })
@@ -116,6 +120,54 @@ Alterar todos os documentos que contenham SH
 ```
     db.usuarios.deleteOne({nome: "Fabrizio Mongo SH"})
 ```
+
+# Algumas consultas
+
+- db.usuarios.find( {} ) : retorna todos os usuários da coleção
+- db.usuarios.find( { "name" : "Sarah Jones" } ): retorna os usuários exatamente com o name igual a 'Sarah Hojes'
+- db.usuarios.find( { "name" : { $regex : /a/ }  } ) : retorna todos os usuários que contenham a letra 'a' no atributo 'name'.
+- db.usuarios.find(  { $and :  [ { "name" : { $regex : /a/ } }, { id : { $gte : 1 }  } ]  }   ): retorna todos os usuários que contenham a letra 'a' no atributo 'name' e possuem o atributo 'id' >= 1
+- db.usuarios.find( { "name" : { $regex : /a/ } , id : { $gte : 1 }  }  ): retorna todos os usuários que contenham a letra 'a' no atributo 'name' e possuem o atributo 'id' >= 1
+
+
+
+# Criando Index para indexar todos os textos de todos os atributos de uma coleção
+
+Trocar banco de dados
+
+```
+    use dbmongo
+```
+
+Criando Index para indexar todos os textos de todos os atributos de uma coleção:
+
+```
+    db.usuarios.createIndex( { "$**": "text" } )
+```
+
+Buscando todos os documentos com a palavra "Adam"
+
+```
+    db.usuarios.find({ $text: { $search: "Adam" } })
+```
+
+Inserindo um novo documento:
+
+```
+    db.usuarios.insert({
+        "id": 4,
+        "nomeBrasil": "Sarah Jones",
+        "isActive": false,
+        "dob": "1970-30-09"    
+    })
+```
+
+Buscando todos os docuementos com a palavra Sarah Jones:
+
+```
+    db.usuarios.find({ $text: { $search: "Sarah Jones" } })
+```
+
 
 
 # No Spring (camada repository) :
