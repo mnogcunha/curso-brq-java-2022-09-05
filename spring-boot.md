@@ -249,7 +249,6 @@ A capacidade de usar anotações como **@Autowired** para injetar beans gerencia
 - @Component
 
 @Component é uma anotação que permite o Spring detectar automaticamente nossos beans personalizados.
-
 Em outras palavras, sem ter que escrever nenhum código explícito, o Spring irá:
 
 - Examinar nosso aplicativo para classes anotadas com @Component
@@ -265,3 +264,99 @@ Em outras palavras, sem ter que escrever nenhum código explícito, o Spring ir�
 - **Endpoint** é um canal através do qual o sistema pode receber ou enviar uma mensagem. Ele pode se referir a um URI de serviço da Web, URI de fila, arquivo, endereço de e-mail, etc.
 
 - **Processor** é uma interface Java que é usada para adicionar lógica de integração personalizada a uma rota. Ele contém um único método de processo usado para pré-formar a lógica de negócios personalizada em uma mensagem recebida por um consumidor.
+
+
+# Fluxo "normal" de desenvolvimento
+
+1-) Criar a camada de model (mapear o banco de dados em classes JAVA)
+
+2-) Criar a camada de repository (camada de acesso ao banco de dados)
+
+3-) Criar a camada de services
+
+4-) Criar os controllers e os DTOS, junto com a validação de dados
+
+5-) Criar testes unitários
+
+# Algumas dependências:
+
+- **Para validação, podemos utilizar a :**
+```
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+```
+- **Para converter objetos(DTO -> Model e Model -> DTO), podemo usar a:**
+```
+<dependency>
+    <groupId>org.modelmapper</groupId>
+    <artifactId>modelmapper</artifactId>
+  <version>2.4.4</version>
+</dependency>
+```
+- **Para usar o JPA (especificação) : Hibernate (implementa a especificação)**
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+```
+- **Para usar o Swagger:**
+```
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger2</artifactId>
+    <version>2.9.2</version>
+</dependency>
+
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger-ui</artifactId>
+    <version>2.9.2</version>
+</dependency>
+```
+- **Para usar o driver do banco de dados relacional:**
+```
+<!-- Dependência do driver do MySQL para o JAVA-->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <scope>runtime</scope>
+</dependency>
+```
+```
+<!-- Dependência do driver do PostgreSQL para o JAVA-->
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.5.0</version>
+</dependency>
+```
+- **Para criar o relatório dos testes unitários e enviar para o SonarQube (ferramenta de qualidade de código)**
+```
+<!-- Dependência do Jacoco: testes unitários -->
+<dependency>
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+    <version>0.8.6</version>
+</dependency>
+```
+```
+<!-- dependência para ActiveMQ para Spring -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-activemq</artifactId>
+    <version>2.7.5</version>
+</dependency>
+```
+
+# Fluxo "normal" de usar/testar a aplicação
+
+1-) Partir do Postman (ou outro client de REST) com o verbo e endpoint correto
+
+# FAQs
+
+# Qual o papel do POM?
+  resp: quando utilizamos o gerenciador de dependências MAVEN, temos que
+  colocar todas as dependências (bibliotecas) no arquivo pom.xml, que está na raiz do projeto.
