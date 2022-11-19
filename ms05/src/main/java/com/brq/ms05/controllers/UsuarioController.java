@@ -22,32 +22,64 @@ public class UsuarioController {
     private UsuarioMapper mapper;
 
     @GetMapping
-    public ResponseEntity<List<UsuarioDTO>> getAll(){
-        return  ResponseEntity.ok().body( this.service.getAll() );
+    public ResponseEntity<List<UsuarioDTO>> getAll() {
+        return ResponseEntity.ok().body(this.service.getAll());
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> create(@Valid @RequestBody UsuarioDTO dto){
-        return ResponseEntity.status(HttpStatus.CREATED).body( service.create(dto.toModel())  );
+    public ResponseEntity<UsuarioDTO> create(@Valid @RequestBody UsuarioDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(dto.toModel()));
     }
 
-    @PatchMapping (value = "{id}")
+    @PatchMapping(value = "{id}")
     public ResponseEntity<UsuarioDTO> update(
             @PathVariable String id,
-            @Valid @RequestBody UsuarioDTO dto){
+            @Valid @RequestBody UsuarioDTO dto) {
         return ResponseEntity.ok().body(service.update(id, dto));
     }
 
     @DeleteMapping(value = "{id}")
     public ResponseEntity<Void> delete(
             @PathVariable String id
-    ){
+    ) {
         service.delete(id);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<UsuarioDTO> getOne(@PathVariable String id){
-        return ResponseEntity.ok().body( service.getOne(id) );
+    public ResponseEntity<UsuarioDTO> getOne(@PathVariable String id) {
+        return ResponseEntity.ok().body(service.getOne(id));
+    }
+
+    @GetMapping(value = "/nome/{nome}")
+    public ResponseEntity<List<UsuarioDTO>> findByNome(@PathVariable String nome) {
+
+        // TODO: Não esquecer do ResponseEntity
+        return ResponseEntity
+                .ok()
+                .body(service.findByNome(nome));
+    }
+    @GetMapping(value = "/find-by-nome/{nome}")
+    public ResponseEntity<List<UsuarioDTO>> findByNomeContains(@PathVariable String nome) {
+
+        // TODO: Não esquecer do ResponseEntity
+       return ResponseEntity
+               .ok()
+               .body(service.findByNomeContains(nome));
+    }
+
+    @GetMapping(value = "/find-by-nome/{nomeBusca}/by-email/{emailBusca}")
+    public ResponseEntity<List<UsuarioDTO>> findByNomeContainsAndEmailContains(@PathVariable String nomeBusca,
+                                                                               @PathVariable String emailBusca){
+        // TODO: Não esquecer do ResponseEntity
+        return ResponseEntity
+                .ok()
+                .body(service.findByNomeContainsAndEmailContains(nomeBusca, emailBusca));
+    }
+
+    @GetMapping(value = "find-by-all-attrs/{input}")
+    public ResponseEntity< List<UsuarioDTO> > findByAllAttrs(
+            @PathVariable String input){
+        return ResponseEntity.ok().body( service.findByAllAttrs(input) );
     }
 }

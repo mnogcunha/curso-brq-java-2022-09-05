@@ -11,4 +11,12 @@ public interface UsuarioRepository
         extends MongoRepository<UsuarioModel, String> {
 
     List<UsuarioModel> findByNome(String nome);
+
+    List<UsuarioModel> findByNomeContains(String nome);
+
+    List<UsuarioModel> findByNomeContainsAndEmailContains(String nome, String email);
+
+    List<UsuarioModel> findByNomeContainsOrEmailContains(String nome, String email);
+
+    List<UsuarioModel> findByNomeStartsWithOrEmailEndsWith(String nome, String email);
 }
