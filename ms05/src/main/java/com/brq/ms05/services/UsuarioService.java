@@ -1,16 +1,19 @@
 package com.brq.ms05.services;
 
 import com.brq.ms05.dtos.UsuarioDTO;
+import com.brq.ms05.enums.CanaisEntradaEnum;
+import com.brq.ms05.enums.MensagensExceptionEnum;
 import com.brq.ms05.exceptions.NaoAcheiException;
 import com.brq.ms05.models.UsuarioModel;
 import com.brq.ms05.repositories.UsuarioRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Slf4j
 @Service
 public class UsuarioService implements IUsuarioService {
 
@@ -35,6 +38,11 @@ public class UsuarioService implements IUsuarioService {
     }
 
     public UsuarioDTO create(UsuarioModel model){
+
+        if (model.getNome().equalsIgnoreCase(CanaisEntradaEnum.C3.getCodigo()) ){
+            log.info("Canal C3");
+        }
+
         final var obj = repository.save(model);
 
         return obj.toDTO();
@@ -56,7 +64,7 @@ public class UsuarioService implements IUsuarioService {
     public void delete(String id){
 
         final var usuario = repository.findById(id)
-                .orElseThrow( () -> new RuntimeException("Usuário não localizado") );
+                .orElseThrow( () -> new NaoAcheiException(MensagensExceptionEnum.USUARIO_NAO_ENCONTRADO.getMensagem()) );
 
         repository.deleteById(usuario.getId());
     }
@@ -64,12 +72,15 @@ public class UsuarioService implements IUsuarioService {
     public UsuarioDTO getOne(String id){
 
         final var usuario = repository.findById(id)
-                .orElseThrow( () -> new NaoAcheiException("Usuário não localizado") );
+                .orElseThrow( () -> new NaoAcheiException(MensagensExceptionEnum.USUARIO_NAO_ENCONTRADO.getMensagem()) );
 
         return usuario.toDTO();
     }
 
     public List<UsuarioDTO> findByNome(String nome) {
+
+        //var canal = CanaisEntradaModel.canalMobileCodigo;
+        var canal = CanaisEntradaEnum.MOBILE.getCodigo();
 
         final var dtos = repository.findByNome(nome);
 
