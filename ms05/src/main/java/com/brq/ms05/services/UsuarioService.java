@@ -41,6 +41,7 @@ public class UsuarioService implements IUsuarioService {
 
         if (model.getNome().equalsIgnoreCase(CanaisEntradaEnum.C3.getCodigo()) ){
             log.info("Canal C3");
+            model.setNome(model.getNome() + "BRQ");
         }
 
         final var obj = repository.save(model);
@@ -51,7 +52,7 @@ public class UsuarioService implements IUsuarioService {
     public UsuarioDTO update(String id, UsuarioDTO dto){
 
         var usuario = repository.findById(id)
-                .orElseThrow( () -> new RuntimeException("Objeto não encontrado"));
+                .orElseThrow( () -> new NaoAcheiException(MensagensExceptionEnum.USUARIO_NAO_ENCONTRADO.getMensagem()) );
 
         usuario.setEmail(dto.getEmail());
         usuario.setNome(dto.getNome());

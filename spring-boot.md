@@ -366,3 +366,30 @@ Em outras palavras, sem ter que escrever nenhum código explícito, o Spring ir�
   resp: quando queremos criar um conversor de tipos de objetos no JAVA. Ex: criar um conversor de tipo de dados de DTO para Model
 - Config?
   resp: um pacote que guarda configuração atributos das dependências do nosso projeto. Ex: criamos um arquivo config para guardar as configurações do swagger.
+
+# Testes Unitários
+
+Objetivo: testar individualmente nosso código-fonte para garantir e testar a qualidade de nosso código
+
+- @SprintBootTest: fornece um jeito de iniciar o Spring Boot para utilizar/realizar os testes unitários da classe
+- @ExtendWith: uma anotação do JUnit (framework de teste) para rodar os testes unitários. No nosso caso utilizamos a classe SpringExtension para rodar os testes unitários seguindo uma extensão do spring boot
+
+O ato de **MOCKAR** pode ser observado como **SIMULAR**.
+
+- @MockBean: usamos esta anotação para especificar que este objeto vai ser mockado (simunado) pelo framework de teste.
+
+- BDD: Behavior Driven Development (Desenvolvimento Orientado a Comportamento): é um processo para auxiliar a especificação e execução de testes.
+
+As palavras chaves são:
+
+- dado que
+- quando
+- então
+
+Exemplo:
+
+- Cenário: retornar um usuário da minha aplicação
+
+- Dado que : queira retornar o usuário de ID 1
+- Quando: eu fizer a chamada para o serviço
+- Então: terei os dados do usuário com ID 1
