@@ -23,9 +23,7 @@
 			src/main/java/**/repositories/**,
 			src/main/java/**/exceptions/**,
 			src/main/java/br/com/**/Ms01ApplicationTests.java,
-			src/main/java/com/brq/ms01/Ms01Application.java,
-			src/main/java/com/brq/ms01/services/FinanciamentoService.java,
-			src/main/java/com/brq/ms01/controllers/FinanciamentoController.java
+			src/main/java/com/brq/ms01/Ms01Application.java
 		</sonar.exclusions>
 
 		<!-- propriedades do sonar -->
