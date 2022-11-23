@@ -17,16 +17,12 @@ public class UsuarioDTO {
 
     private String id;
 
-    // Anotação do Swagger
     @ApiModelProperty(notes = "nome do usuário", example = "Fabrizio", required = true)
-
     @NotNull(message = "o campo nome não pode ser nulo")
     @NotEmpty(message = "o campo nome não pode ser vazio")
     private String nome;
 
-    // Anotação do Swagger
     @ApiModelProperty(notes = "email do usuário", example = "fa@gmail.com", required = true)
-
     @NotNull(message = "o campo email não pode ser nulo")
     @NotEmpty(message = "o campo email não pode ser vazio")
     private String email;

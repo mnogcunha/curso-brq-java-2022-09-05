@@ -52,7 +52,9 @@ public class UsuarioService implements IUsuarioService {
     public UsuarioDTO update(String id, UsuarioDTO dto){
 
         var usuario = repository.findById(id)
-                .orElseThrow( () -> new NaoAcheiException(MensagensExceptionEnum.USUARIO_NAO_ENCONTRADO.getMensagem()) );
+                .orElseThrow( () -> new NaoAcheiException(
+                        MensagensExceptionEnum.USUARIO_NAO_ENCONTRADO.getMensagem())
+                );
 
         usuario.setEmail(dto.getEmail());
         usuario.setNome(dto.getNome());
@@ -78,33 +80,14 @@ public class UsuarioService implements IUsuarioService {
         return usuario.toDTO();
     }
 
-    public List<UsuarioDTO> findByNome(String nome) {
-
+    public List<UsuarioDTO> findByNome(String nome){
         //var canal = CanaisEntradaModel.canalMobileCodigo;
         var canal = CanaisEntradaEnum.MOBILE.getCodigo();
-
-        final var dtos = repository.findByNome(nome);
-
-        return dtos.stream()
-                .map( el -> el.toDTO())
-                .collect(Collectors.toList());
-    }
-
-    public List<UsuarioDTO> findByNomeContains(String nome) {
-
         final var dtos = repository.findByNomeContains(nome);
+        //final var dtos = repository.findByNome(nome);
 
         return dtos.stream()
-                .map( el -> el.toDTO())
-                .collect(Collectors.toList());
-    }
-
-    public List<UsuarioDTO> findByNomeContainsAndEmailContains(String nome, String email) {
-
-        final var dtos = repository.findByNomeContainsAndEmailContains(nome, email);
-
-        return dtos.stream()
-                .map( el -> el.toDTO())
+                .map( el -> el.toDTO() )
                 .collect(Collectors.toList());
     }
 
