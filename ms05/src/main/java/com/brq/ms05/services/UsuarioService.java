@@ -21,19 +21,10 @@ public class UsuarioService implements IUsuarioService {
     private UsuarioRepository repository;
 
     public List<UsuarioDTO> getAll(){
-        //        List<UsuarioDTO> dtos = new ArrayList<>();
-//
-//        for(UsuarioModel item: models){
-//            dtos.add(item.toDTO());
-//        }
-//        return dtos;
 
-        //final var models= repository.findAll();
-
-        // stream é mais performático - converter List<Model> para List<DTO>
         return repository.findAll()
                 .stream()
-                .map( x -> x.toDTO() )
+                .map( UsuarioModel::toDTO )
                 .collect(Collectors.toList());
     }
 
@@ -81,13 +72,11 @@ public class UsuarioService implements IUsuarioService {
     }
 
     public List<UsuarioDTO> findByNome(String nome){
-        //var canal = CanaisEntradaModel.canalMobileCodigo;
-        var canal = CanaisEntradaEnum.MOBILE.getCodigo();
+
         final var dtos = repository.findByNomeContains(nome);
-        //final var dtos = repository.findByNome(nome);
 
         return dtos.stream()
-                .map( el -> el.toDTO() )
+                .map( UsuarioModel::toDTO )
                 .collect(Collectors.toList());
     }
 
@@ -95,7 +84,7 @@ public class UsuarioService implements IUsuarioService {
         final var dtos = repository.findByNomeContainsOrEmailContains(input, input);
 
         return dtos.stream()
-                .map( el -> el.toDTO() )
+                .map( UsuarioModel::toDTO )
                 .collect(Collectors.toList());
     }
 }

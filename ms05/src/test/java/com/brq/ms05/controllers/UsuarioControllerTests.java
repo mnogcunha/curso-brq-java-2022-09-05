@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class UsuarioControllerTests {
+class UsuarioControllerTests {
 
     @Autowired
     private UsuarioController controller;

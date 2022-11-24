@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class UsuarioServiceTests {
+class UsuarioServiceTests {
 
     // temos que instanciar de fato este objeto pois queremos testar
     @Autowired
@@ -139,8 +139,9 @@ public class UsuarioServiceTests {
         when(repository.findById(id)).thenReturn(usuarioModelOptional);
 
         // então
+        final var dto = usuarioModelInput.toDTO();
         assertThrows( NaoAcheiException.class,
-                () ->  service.update(id, usuarioModelInput.toDTO()) );
+                () ->  service.update(id, dto) );
     }
 
     @Test

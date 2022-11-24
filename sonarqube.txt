@@ -1,0 +1,20 @@
+6b849c332595a1af3a0928b90d34d33fcc8c2ca3
+
+mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=ms01 \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=6b849c332595a1af3a0928b90d34d33fcc8c2ca3
+
+
+
+  mvn clean verify sonar:sonar -Dsonar.projectKey=ms01 -Dsonar.host.url=http://localhost:9000 -Dsonar.login=6b849c332595a1af3a0928b90d34d33fcc8c2ca3
+
+
+3c10c402d34cb54566a147db28bf10e388581b86
+
+mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=ms05 \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=3c10c402d34cb54566a147db28bf10e388581b86
+
+clean install sonar:sonar -Dsonar.projectKey=ms05 -Dsonar.host.url=http://localhost:9000 -Dsonar.login=3c10c402d34cb54566a147db28bf10e388581b86
