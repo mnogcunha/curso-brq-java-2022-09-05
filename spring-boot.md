@@ -393,3 +393,9 @@ Exemplo:
 - Dado que : queira retornar o usuário de ID 1
 - Quando: eu fizer a chamada para o serviço
 - Então: terei os dados do usuário com ID 1
+
+# Qual a diferença entre CrudRepository e JpaRepository ?
+
+A CrudRepository possui apenas os métodos para fazermos as operações de CRUD.
+
+O JpaRepository extende a CrudRepository e adiciona funcionalidades específicas dos bancos relacionais como FLUSH e COMMIT.
