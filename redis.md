@@ -120,3 +120,49 @@ Em outro terminal:
 
     PUBLISH redisChat "Redis is a great caching technique"  
 ```
+
+# Redis Hash
+
+Baseado em:
+
+```
+    https://www.digitalocean.com/community/tutorials/how-to-manage-hashes-in-redis
+```
+
+Um hash Redis é um tipo de dados que representa um mapeamento entre um campo de string e um valor de string. Os hashes podem conter muitos pares de valores de campo e são projetados para não ocupar muito espaço, tornando-os ideais para representar objetos de dados.
+
+Para criar um hash, execute o comando hset. Este comando aceita o nome da chave de hash, a string de campo e a string de valor correspondente como argumentos:
+
+```
+    hset poet:Verlaine nationality French
+```
+
+Você pode determinar se existe um campo para um determinado hash com o comando hexists:
+
+```
+    hexists poet:Verlaine nationality
+```
+
+Para retornar o valor de um campo, execute o comando hget seguido da chave hash e do campo cujo valor você deseja recuperar
+
+```
+    hget poet:Verlaine nationality
+```
+
+Para obter uma lista de todos os campos contidos em um determinado hash, execute o comando hkeys:
+
+```
+    hkeys poet:Verlaine
+```
+
+Por outro lado, execute hvals para recuperar uma lista de valores contidos em um hash
+
+```
+    hvals poet:Verlaine
+```
+
+Para retornar uma lista de todos os campos mantidos por um hash e seus valores associados, execute hgetall:
+
+```
+    hgetall poet:Verlaine
+```
