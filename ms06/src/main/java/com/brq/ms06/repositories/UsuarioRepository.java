@@ -9,5 +9,4 @@ import com.brq.ms06.models.UsuarioModel;
 public interface UsuarioRepository 
 	extends CrudRepository<UsuarioModel, String>{
 	
-
 }

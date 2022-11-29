@@ -26,5 +26,4 @@ public class UsuarioModel {
         final var mapper = new ModelMapper();
         return mapper.map(this,UsuarioDTO.class);
     }
-
 }

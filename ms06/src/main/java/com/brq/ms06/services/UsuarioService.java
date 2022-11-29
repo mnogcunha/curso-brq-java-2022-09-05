@@ -18,14 +18,11 @@ public class UsuarioService implements IUsuarioService {
 	
 	@Autowired
     private UsuarioRepository repository;
-	
-	public List<UsuarioDTO> getAll(){
-		
-		final var list = (List<UsuarioModel>) repository.findAll();
-		
-        return list.stream()
-        	   .map( UsuarioModel::toDTO )
-        	   .collect(Collectors.toList());
-    }
 
+	public List<UsuarioDTO> getAll(){
+		final var list = (List<UsuarioModel>) repository.findAll();
+
+		return list.stream().map( UsuarioModel::toDTO)
+				.collect(Collectors.toList());
+	}
 }

@@ -2,16 +2,13 @@ package com.brq.ms06.dtos;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
-
 import com.brq.ms06.models.UsuarioModel;
+import org.modelmapper.ModelMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.redis.core.RedisHash;
 
 @Data
 @AllArgsConstructor
@@ -19,7 +16,6 @@ import lombok.NoArgsConstructor;
 @RedisHash
 public class UsuarioDTO {
 	
-	@Id
 	private String id;
 	
 	@NotNull(message = "o campo nome não pode ser nulo")
