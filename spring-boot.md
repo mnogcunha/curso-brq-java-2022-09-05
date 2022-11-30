@@ -399,3 +399,8 @@ Exemplo:
 A CrudRepository possui apenas os métodos para fazermos as operações de CRUD.
 
 O JpaRepository extende a CrudRepository e adiciona funcionalidades específicas dos bancos relacionais como FLUSH e COMMIT.
+
+# Spring Redis
+
+- @RedisHash : é a implementação do Hash (valor único) no banco de dados Redis via Spring Boot
+- @Indexed: mecanismo para criar índices secundários (não precisam ser únicos) para conseguir fazer busca de valores no Redis
