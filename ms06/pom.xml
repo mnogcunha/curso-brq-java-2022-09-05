@@ -15,7 +15,20 @@
     <description>Spring Boot + Apache Redis</description>
     <properties>
         <java.version>11</java.version>
-        <camel.version>3.5.0</camel.version>
+        <jacoco.version>0.8.6</jacoco.version>
+        <swagger.version>2.9.2</swagger.version>
+        <modelmapper.version>2.4.4</modelmapper.version>
+        <sonar.exclusions>
+            src/main/java/**/dtos/**,
+            src/main/java/**/models/**,
+            src/main/java/**/configs/**,
+            src/main/java/**/repositories/**,
+            src/main/java/**/exceptions/**,
+            src/main/java/**/enums/**,
+            src/main/java/**/mappers/**,
+            src/main/java/br/com/**/Ms06ApplicationTests.java,
+            src/main/java/com/brq/ms06/Ms06Application.java
+        </sonar.exclusions>
     </properties>
     <dependencies>
 
@@ -71,6 +84,38 @@
             <version>1.5.20</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-spring-web</artifactId>
+            <version>2.9.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--		dependência do swagger-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <!--		dependência do swagger-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+
+        <!-- dependência do Jacoco -->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.6</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -86,6 +131,29 @@
                         </exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+
+            <!-- JACOCO: java code coverage library: -->
+            <!-- uma biblioteca Java para calcular teste de cobertura do projeto -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <id>jacoco-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

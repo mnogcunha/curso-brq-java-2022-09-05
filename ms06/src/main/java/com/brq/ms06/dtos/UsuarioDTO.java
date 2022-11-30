@@ -15,7 +15,7 @@ import org.springframework.data.redis.core.RedisHash;
 @NoArgsConstructor
 @RedisHash
 public class UsuarioDTO {
-	
+
 	private String id;
 	
 	@NotNull(message = "o campo nome não pode ser nulo")
@@ -24,7 +24,7 @@ public class UsuarioDTO {
 	
 	@NotNull(message = "o campo email não pode ser nulo")
     @NotEmpty(message = "o campo email não pode ser vazio")
-	private String email;	
+	private String email;
 
 	public UsuarioModel toModel(){
         final var mapper = new ModelMapper();
