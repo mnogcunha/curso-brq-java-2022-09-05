@@ -1,5 +1,6 @@
 package com.brq.ms06.models;
 
+import lombok.Builder;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
@@ -11,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,6 +32,4 @@ public class UsuarioModel {
 
 		return mapper.map(this, UsuarioDTO.class);
 	}
-
-
 }

@@ -2,6 +2,7 @@ package com.brq.ms05.services;
 
 import com.brq.ms05.dtos.UsuarioDTO;
 import com.brq.ms05.models.UsuarioModel;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -20,4 +21,8 @@ public interface IUsuarioService {
     List<UsuarioDTO> findByNome(String nome);
 
     List<UsuarioDTO> findByAllAttrs(String input);
+    void insertMany(int times);
+
+    Page<UsuarioModel> findByEmail(String email);
+    void deleteAll();
 }

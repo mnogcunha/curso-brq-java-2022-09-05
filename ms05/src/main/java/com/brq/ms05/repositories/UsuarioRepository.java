@@ -18,4 +18,5 @@ public interface UsuarioRepository
     List<UsuarioModel> findByNomeContainsOrEmailContains(String nome, String email);
 
     List<UsuarioModel> findByNomeStartsWithOrEmailEndsWith(String nome, String email);
+
 }

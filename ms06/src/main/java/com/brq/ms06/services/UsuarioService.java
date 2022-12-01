@@ -1,11 +1,14 @@
 package com.brq.ms06.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.brq.ms06.enums.MensagensExceptionEnum;
 import com.brq.ms06.exceptions.NaoAcheiException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.brq.ms06.dtos.UsuarioDTO;
@@ -64,7 +67,7 @@ public class UsuarioService implements IUsuarioService {
 
 		repository.deleteById(response.getId());
 	}
-
+	@Override
 	public List<UsuarioDTO> findByNome(String nome){
 
 		final var dtos = repository.findByNome(nome);
@@ -74,11 +77,48 @@ public class UsuarioService implements IUsuarioService {
 				.collect(Collectors.toList());
 	}
 
+	@Override
 	public List<UsuarioDTO> findByAllAttrs(String input){
-		final var dtos = repository.findByNomeContainsOrEmailContains(input, input);
 
-		return dtos.stream()
-				.map( UsuarioModel::toDTO )
+		final var list = (List<UsuarioModel>) repository.findAll();
+
+		return list.stream()
+				.filter( element -> element.getNome().contains(input) || element.getEmail().contains(input) )
+				.map( UsuarioModel::toDTO)
 				.collect(Collectors.toList());
+
+	}
+
+	@Override
+	public void insertMany(int times) {
+
+		List<UsuarioModel> list = new ArrayList<>();
+
+		for (int i = 0; i < times; i++) {
+
+			final var u = UsuarioModel
+					.builder()
+					.nome("Usuario " + i)
+					//.email("usuario"+i+"@gmail.com")
+					.email("usuario@gmail.com")
+					.build();
+			//repository.save(u);
+			list.add(u);
+		}
+
+		repository.saveAll(list);
+	}
+
+	public Page<UsuarioModel> findByEmail(String email){
+
+		final var pageRequest = PageRequest.of(0, 3);
+
+		Page<UsuarioModel> response = repository.findByEmail(email, pageRequest);
+
+		return response;
+	}
+
+	public void deleteAll() {
+		repository.deleteAll();
 	}
 }

@@ -5,8 +5,10 @@ import java.util.stream.Collectors;
 
 import com.brq.ms06.dtos.UsuarioDTO;
 import com.brq.ms06.mappers.UsuarioMapper;
+import com.brq.ms06.models.UsuarioModel;
 import com.brq.ms06.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,7 +59,14 @@ public class UsuarioController {
 	}
 
 	@GetMapping(value = "find-by-all-attrs/{input}")
-	public ResponseEntity< List<UsuarioDTO> > findByAllAttrs(@PathVariable String input){
+	public ResponseEntity< List<UsuarioDTO> > findAll(@PathVariable String input){
 		return ResponseEntity.ok().body( service.findByAllAttrs(input) );
+	}
+
+	@GetMapping(value = "find-by-email/{email}")
+	public ResponseEntity<Page<UsuarioModel>> findByEmail(
+			@PathVariable String email){
+
+		return ResponseEntity.ok().body(service.findByEmail(email));
 	}
 }

@@ -19,4 +19,6 @@ public interface IUsuarioService {
 	List<UsuarioDTO> findByNome(String nome);
 
 	List<UsuarioDTO> findByAllAttrs(String input);
+
+    void insertMany(int times);
 }
