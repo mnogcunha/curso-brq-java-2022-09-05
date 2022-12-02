@@ -9,6 +9,7 @@ import com.brq.ms06.exceptions.NaoAcheiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.brq.ms06.dtos.UsuarioDTO;
@@ -109,9 +110,9 @@ public class UsuarioService implements IUsuarioService {
 		repository.saveAll(list);
 	}
 
-	public Page<UsuarioModel> findByEmail(String email){
+	public Page<UsuarioModel> findByEmail(String email, int page, int limit, String orderBy, String direction){
 
-		final var pageRequest = PageRequest.of(0, 3);
+		final var pageRequest = PageRequest.of(page, limit, Sort.Direction.valueOf(direction), orderBy );
 
 		Page<UsuarioModel> response = repository.findByEmail(email, pageRequest);
 

@@ -23,7 +23,7 @@ public interface IUsuarioService {
 
 	void insertMany(int times);
 
-	Page<UsuarioModel> findByEmail(String email);
+	Page<UsuarioModel> findByEmail(String email, int page, int limit, String orderBy, String direction);
 
 	void deleteAll();
 }
