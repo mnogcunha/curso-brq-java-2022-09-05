@@ -11,6 +11,7 @@
         <module name="ms04" />
         <module name="ms03" />
         <module name="ms01" />
+        <module name="ms07" />
         <module name="ms06" />
       </profile>
     </annotationProcessing>
@@ -20,6 +21,7 @@
       <module name="ms04" target="11" />
       <module name="ms05" target="11" />
       <module name="ms06" target="11" />
+      <module name="ms07" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -29,6 +31,7 @@
       <module name="ms04" options="-parameters" />
       <module name="ms05" options="-parameters" />
       <module name="ms06" options="-parameters" />
+      <module name="ms07" options="-parameters" />
     </option>
   </component>
 </project>
