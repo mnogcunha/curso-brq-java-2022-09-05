@@ -404,3 +404,7 @@ O JpaRepository extende a CrudRepository e adiciona funcionalidades específicas
 
 - @RedisHash : é a implementação do Hash (valor único) no banco de dados Redis via Spring Boot
 - @Indexed: mecanismo para criar índices secundários (não precisam ser únicos) para conseguir fazer busca de valores no Redis
+
+# Spring Camunda
+
+- Java Delegate: é um padrão de projeto que permite uma classe acessar as propriedade de outra classe. Pode ser visto como uma relação de mapeamentos entre objetos na qual o método do primeiro objeto chama o método do segundo objeto.
