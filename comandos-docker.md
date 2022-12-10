@@ -64,7 +64,7 @@ Obs: exemplo na criação do container
 
 # Como podemos acessar o terminal de um container?
 
-Obs: o container deve estar em execução 
+Obs: o container deve estar em execução
 
 ```
 
@@ -111,7 +111,7 @@ Para sair do container, digite:         exit
 
 # Como podemos fazer para ao deletar um container, não perdermos dados do mesmo?
 
-Resp: usando o conceito de volume
+Resp: usando o conceito de volume, em que é um mecanismo parar salvar arquivos persistentes e compartilhar arquivos e dados entre os containers
 
 ${PWD} retorna o endereço de onde estamos
 
@@ -126,17 +126,65 @@ ${PWD} retorna o endereço de onde estamos
 
     docker exec -it hello-world /bin/sh
 
-    docker run --name hello-world -p 80:80 -p 8000:80 -v ${PWD}/meu-volume:/meu-volume-container-3 
+    docker run --name hello-world -p 80:80 -p 8000:80 -v ${PWD}/meu-volume:/meu-volume-container
+
+# Comandos para volumes
+
+Para entrar dentro do container e dentro da pasta **meu-volume-container**
+
+```
+    docker exec -it hello-world /bin/bash
+    cd meu-volume-container/
 ```
 
-cd meu-volume-container/
-touch arquivo.txt
-tail -f arquivo.txt 
-docker run --name hello-world -p 80:80 -p 8000:80 -v ${PWD}/meu-volume:/meu-volume-container docker/getting-started
-docker exec -it hello-world /bin/sh
-cd ..
-touch t.txt
-docker run --name hello-world -p 80:80 -p 8000:80 -v ${PWD}/meu-volume:/meu-volume-container-3 docker/getting-started
+Criar arquivo **arquivo.txt**
 
+```
+    touch arquivo.txt
+```
 
-docker run -d --name=mysql-java -p 3306:3306 --env="MYSQL_ROOT_PASSWORD=root" -v ${PWD}/mysql-datadir:/var/lib/mysql    mysql
+Observar mudança no arquivo **arquivo.txt**
+
+```
+    tail -f arquivo.txt 
+```
+
+## subindo o banco MySQL via container
+
+Mapeando porta 3306, usuário **root** e senha **root**
+
+```
+    docker run -d --name=mysql-java -p 3306:3306 --env="MYSQL_ROOT_PASSWORD=root" -v ${PWD}/mysql-datadir:/var/lib/mysql    mysql
+```
+
+## Para acessar o banco de dados via terminal
+
+```
+    docker exec -it mysql-java /bin/bash
+    mysql -uroot -proot
+```
+
+## Executando comandos SQLs
+
+```
+    create database db_correntista;
+    use db_correntista;
+    create table cuentas ( cd_contas int primary key auto_increment, nombre varchar(40) );
+```
+
+# aula criando imagem
+
+Para criar nossa própria imagem: 
+
+## para criar nossa própria imagem
+
+```
+    cd nginx
+    docker build -t brq-nginx:latest .
+```
+
+# para criar um container oracle
+
+```
+    docker run -d -p 49161:1521 -e ORACLE_ALLOW_REMOTE=true  -e ORACLE_PASSWORD=oracle -e RELAX_SECURITY=1 --name oracle-xe-11g -e TZ=BR epiclabs/docker-oracle-xe-11g
+```
