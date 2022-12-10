@@ -1,12 +1,8 @@
 senhas.txt
-<<<<<<< HEAD
-novo-arquivo.txt
-=======
-novo-arquivo
->>>>>>> alterar-arquivos
+teste.txt
 a.txt
->>>>>> Novas Pastas
 meu-volume
 mysql-datadir
-camunda-h2-database.mv.db
-camunda-h2-database.trace.db
+
+tmp
+.idea
