@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class CadastroModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private Integer idade;
 
