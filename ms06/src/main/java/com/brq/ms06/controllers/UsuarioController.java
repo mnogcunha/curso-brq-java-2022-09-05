@@ -1,7 +1,6 @@
 package com.brq.ms06.controllers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.brq.ms06.dtos.UsuarioDTO;
 import com.brq.ms06.mappers.UsuarioMapper;
@@ -58,9 +57,9 @@ public class UsuarioController {
 		return ResponseEntity.ok().body(service.findByNome(nome));
 	}
 
-	@GetMapping(value = "find-by-all-attrs/{input}")
-	public ResponseEntity<List<UsuarioDTO>> findAll(@PathVariable String input) {
-		return ResponseEntity.ok().body(service.findByAllAttrs(input));
+	@GetMapping(value = "find-by-nome-contains/{nome}")
+	public ResponseEntity<List<UsuarioDTO>> findByNomeContains(@PathVariable String input) {
+		return ResponseEntity.ok().body(service.findByNomeContains(input));
 	}
 
 	@GetMapping(value = "find-by-email/{email}")

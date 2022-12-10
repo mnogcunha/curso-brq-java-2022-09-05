@@ -152,7 +152,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\": \"Fabrizio\",\n    \"email\" : \"fabrizio@gp.com\",\n    \"telefone\" : \"(11) 98273-3817\"\n}",
+							"raw": "{\n    \"nome\": \"SAT5\",\n    \"email\" : \"fabrizio3@gp.com.br\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -197,7 +197,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\" : \"Fabrizio Alterado\",\n    \"email\" : \"fabrizio@professor.com\",\n    \"telefone\" : \"123456789\"\n}",
+							"raw": "{\n    \"nome\" : \"Fabrizio Alterado\",\n    \"email\" : \"fabrizio@professor.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -205,14 +205,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/usuarios/2",
+							"raw": "localhost:8080/usuarios/89c0e4e3-ec4a-4d3d-b38c-bb8ec6a9a999",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"usuarios",
-								"2"
+								"89c0e4e3-ec4a-4d3d-b38c-bb8ec6a9a999"
 							]
 						}
 					},
@@ -224,14 +224,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/usuarios/636faaa962137dce7bdb7fe0",
+							"raw": "localhost:8080/usuarios/3894F3973E1143959564561E89480CE7FC424A745C9900BB82D1B84355CA0EF1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"usuarios",
-								"636faaa962137dce7bdb7fe0"
+								"3894F3973E1143959564561E89480CE7FC424A745C9900BB82D1B84355CA0EF1"
 							]
 						}
 					},
@@ -282,7 +282,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/usuarios/find-by-nome/Fabrizio",
+							"raw": "localhost:8080/usuarios/find-by-nome/Fabrizio Alterado",
 							"host": [
 								"localhost"
 							],
@@ -290,7 +290,65 @@
 							"path": [
 								"usuarios",
 								"find-by-nome",
-								"Fabrizio"
+								"Fabrizio Alterado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-by-nome-contains",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuarios/find-by-nome-contains/usuario9",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios",
+								"find-by-nome-contains",
+								"usuario9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-by-email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuarios/find-by-email/usuario@gmail.com?page=1&limit=9&orderBy=nome&direction=DESC",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios",
+								"find-by-email",
+								"usuario@gmail.com"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "9"
+								},
+								{
+									"key": "orderBy",
+									"value": "nome"
+								},
+								{
+									"key": "direction",
+									"value": "DESC"
+								}
 							]
 						}
 					},
@@ -302,15 +360,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/usuarios/find-by-all-attrs/fab",
+							"raw": "localhost:8080/usuarios/find-by-all-attrs1/sh",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"usuarios",
-								"find-by-all-attrs",
-								"fab"
+								"find-by-all-attrs1",
+								"sh"
 							]
 						}
 					},

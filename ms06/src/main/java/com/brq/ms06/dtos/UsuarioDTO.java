@@ -3,6 +3,7 @@ package com.brq.ms06.dtos;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import com.brq.ms06.models.UsuarioModel;
+import lombok.Builder;
 import org.modelmapper.ModelMapper;
 
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.redis.core.RedisHash;
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

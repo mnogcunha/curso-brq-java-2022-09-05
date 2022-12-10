@@ -118,27 +118,6 @@ class UsuarioServiceTests {
     }
 
     @Test
-    void createWhenNameNotEqualsTest(){
-
-        // DADO QUE (cenário inicial de teste : inicialização das variáveis)
-        String nome = "NotSAT5";
-        String id = "1";
-
-        final var usuarioModelInput = createUsuarioModelMock(id, nome);
-
-        // QUANDO( mockar: quando simulamos as outras camadas necessárias do teste)
-        when(repository.save(usuarioModelInput)).thenReturn(usuarioModelInput);
-
-        // ENTÃO (execução do teste: chamar o método a ser testado)
-        final var response = service.create(usuarioModelInput);
-
-        // VERIFICAR (verificar o resultado do passo anterior)
-        assertThat(response.getNome()).isEqualTo(usuarioModelInput.getNome());
-        assertThat(response.getId()).isEqualTo(usuarioModelInput.getId());
-        assertThat(response.getEmail()).isEqualTo(usuarioModelInput.getEmail());
-    }
-
-    @Test
     void updateWhenFindUserTest(){
 
         // DADO QUE (cenário inicial de teste : inicialização das variáveis)
@@ -242,6 +221,26 @@ class UsuarioServiceTests {
         assertThat(response.get(0).getEmail()).isEqualTo(listModel.get(0).getEmail());
     }
 
+    @Test
+    void findByNomeContainsTest(){
+
+        // DADO QUE (cenário inicial de teste : inicialização das variáveis)
+        String nome = "nome";
+        String email = "email";
+        final var usuarioModel = createUsuarioModelMock(null, nome, email);
+        final var listModel = Arrays.asList(usuarioModel);
+
+        // QUANDO( mockar: quando simulamos as outras camadas necessárias do teste)
+        when(repository.findAll()).thenReturn(listModel);
+
+        // ENTÃO (execução do teste: chamar o método a ser testado)
+        final var response = service.findByNomeContains(nome);
+
+        // VERIFICAR (verificar o resultado do passo anterior)
+        assertThat(response.get(0).getNome()).isEqualTo(listModel.get(0).getNome());
+        assertThat(response.get(0).getEmail()).isEqualTo(listModel.get(0).getEmail());
+    }
+
 //    @Test
 //    void findByEmailTest(){
 //        String input = "busca";
@@ -255,7 +254,7 @@ class UsuarioServiceTests {
 //        when(repository.findByEmail(String email)).thenReturn(listModel);
 //
 //        // então
-//        final var response = service.findByEmail(String email);
+//        final var response = service.findByEmail(String email, int page, int limit, String orderBy, String direction););
 //
 //        // validar teste
 //        assertThat(response.get(0).getId()).isEqualTo(listModel.get(0).getId());

@@ -19,7 +19,7 @@ public interface IUsuarioService {
 
 	List<UsuarioDTO> findByNome(String nome);
 
-	List<UsuarioDTO> findByAllAttrs(String input);
+	List<UsuarioDTO> findByNomeContains(String input);
 
 	void insertMany(int times);
 

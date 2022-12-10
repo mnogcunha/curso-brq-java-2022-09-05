@@ -30,17 +30,24 @@ class UsuarioControllerTests {
         // dado que
 
         //quando
-        final var usuarioDTO = createUsuarioDTO();
-        final var listDTO = Arrays.asList(usuarioDTO);
-        when(service.getAll()).thenReturn(listDTO);
+        final var dto = UsuarioDTO
+                .builder()
+                .id("1")
+                .nome("nome")
+                .email("email")
+                .build();
+
+        final var listEntity = Arrays.asList(dto);
+
+        // QUANDO( mockar: quando simulamos as outras camadas necessárias do teste)
+        when(service.getAll()).thenReturn(listEntity);
 
         //então
         final var response = controller.getAll();
 
         //validação
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).isEqualTo(listDTO);
-        verify(service, times(1)).getAll();
+        assertThat(response.getBody()).isEqualTo(listEntity);
     }
 
     @Test
@@ -146,6 +153,29 @@ class UsuarioControllerTests {
         assertThat(response.getBody()).isEqualTo(listDTO);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         verify(service, times(1)).findByNome(nomeSearch);
+        assertThat(response.getBody().size()).isEqualTo(1);
+    }
+
+    @Test
+    void findByNomeContainsTest(){
+        // dado que
+        String id = "1";
+        String nome = "nome";
+        String email = "email";
+        String nomeSearch = "nome-busca";
+
+        // quando
+        final var usuarioDTO = createUsuarioDTO(id, nome, email);
+        final var listDTO = Arrays.asList(usuarioDTO);
+        when(service.findByNomeContains(nomeSearch)).thenReturn(listDTO);
+
+        // então
+        final var response = controller.findByNomeContains(nomeSearch);
+
+        // validação
+        assertThat(response.getBody()).isEqualTo(listDTO);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        verify(service, times(1)).findByNomeContains(nomeSearch);
         assertThat(response.getBody().size()).isEqualTo(1);
     }
 
