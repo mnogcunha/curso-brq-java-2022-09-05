@@ -188,3 +188,66 @@ Para criar nossa própria imagem:
 ```
     docker run -d -p 49161:1521 -e ORACLE_ALLOW_REMOTE=true  -e ORACLE_PASSWORD=oracle -e RELAX_SECURITY=1 --name oracle-xe-11g -e TZ=BR epiclabs/docker-oracle-xe-11g
 ```
+
+# Coletânea Docker
+
+## ActiveMQ 
+docker run --name activemq -p 61616:61616 -p 8161:8161 rmohr/activemq 
+
+## Sonarqube
+docker run -d --name sonarqube -p 9000:9000 -p 9092: 9092 sonarqube9.0.1-community 
+
+## Mongo
+docker run --name mongo -p 27017:27017 -d mongo:3.6 
+
+## MySQL
+docker run -d --name=mysql-java -p 3306:3306 --env="MYSQL_ROOT_PASSWORD=root" -v ${PWD}/mysql-datadir:/var/lib/mysql    mysql
+
+## Redis 
+
+### Criando rede no docker
+docker network create -d bridge redis-network
+
+### Criando container Redis
+docker run --name redis -d -p 6379:6379 -it --network=redis-network redis:latest
+
+### criando interface gráfica para acessar Redis
+docker run --name redis-commander -d --env REDIS_HOSTS=redis -p 8081:8081 --network=redis-network rediscommander/redis-commander:latest
+
+### Criando Rede Docker para exercício mongo
+
+- buildar container docker
+
+```
+    docker build -t ms05 .
+```
+
+- criar rede docker
+
+```
+    docker network create mongo-network
+```
+
+- associoar banco de dados mongo a nova rede docker
+
+```
+    docker network connect mongo-network mongo
+```
+
+- parar o container ms05 antigo
+
+```
+    docker stop ms05
+```
+
+- remover container ms05 antigo
+
+```
+    docker rm ms05
+```
+
+- subir novo container ms05 na nova rede docker
+
+```
+    docker run -p 8080:8080 --name ms05 --network mongo-network  ms05
+```

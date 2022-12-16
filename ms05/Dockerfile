@@ -19,6 +19,6 @@ WORKDIR $PROJECT_HOME
 # vamos expor a porta 8080
 EXPOSE 8080
 
-#CMD ["java", "-Dspring.profiles.active=prd", "-jar" ,"./app.jar"]
-CMD ["java", "-jar" ,"./app.jar"]
+CMD ["java", "-Dspring.profiles.active=prd", "-jar" ,"./app.jar"]
+#CMD ["java", "-jar" ,"./app.jar"]
 # java -jar ./app.jar
